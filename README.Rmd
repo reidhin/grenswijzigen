@@ -39,7 +39,7 @@ Het pakket van 'grenswijzigingen' kan geïnstalleerd worden vanuit GitHub als:
 
 ``` r
 # Install the development version from GitLab
-devtools::install_github("vng-realisatie/grenswijzigen") 
+devtools::install_github("VNG-Realisatie/grenswijzigen") 
 ```
 
 ### Opzetten project
