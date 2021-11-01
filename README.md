@@ -8,6 +8,8 @@
 
 Deze repository bevat de code voor grenswijzigingen.
 
+Dit is experimentele code waar nog aan gewerkt wordt!
+
 ## Modellen
 
 Alle modellen zijn gebasseerd op het volgen van adressen door de tijd
