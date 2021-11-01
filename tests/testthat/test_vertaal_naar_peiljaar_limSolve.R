@@ -1,4 +1,4 @@
-library(grenswijzigingen)
+library(grenswijzigen)
 library(cbsodataR)
 library(dplyr)
 

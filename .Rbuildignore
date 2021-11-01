@@ -1,3 +1,4 @@
+^renv$
 ^grenswijzigen\.Rproj$
 ^\.Rproj\.user$
 data_external

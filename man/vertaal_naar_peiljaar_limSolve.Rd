@@ -38,7 +38,7 @@ oplossen van een stelsel vergelijkingen met behulp van de functie
 \code{\link[limSolve]{lsei}}.
 }
 \examples{
-library(grenswijzigingen)
+library(grenswijzigen)
 library(cbsodataR)
 library(dplyr)
 

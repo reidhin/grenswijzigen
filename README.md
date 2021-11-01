@@ -59,7 +59,7 @@ geïmplementeerd voor het uitvoeren van grenswijzigingen.
 
 ### Pakket als bibliotheek
 
-Het pakket van ‘grenswijzigen’ kan geïnstalleerd worden vanuit GitHub
+Het pakket van ‘grenswijzigingen’ kan geïnstalleerd worden vanuit GitHub
 als:
 
 ``` r
@@ -69,7 +69,7 @@ devtools::install_github("VNG-Realisatie/grenswijzigen")
 
 ### Opzetten project
 
-Indien gewenst kan de gehele code ook vanuit GitHub gecloned worden. We
+Indien gewenst kan de gehele code ook vanuit GitLab gecloned worden. We
 gebruiken Renv voor het versiebeheer van de packages en de R-versie. Om
 direct te kunnen beginnen installeer je alle relevante packages met het
 commando `renv::restore()`.
@@ -88,7 +88,7 @@ van kolomnamen zelf in te schatten of het om aantallen of aandelen gaat.
 Hieronder staat een basis voorbeeld hoe de code gebruikt kan worden:
 
 ``` r
-library(grenswijzigingen)
+library(grenswijzigen)
 library(cbsodataR)
 library(dplyr)
 #> 
@@ -256,23 +256,12 @@ Internationaal-licentie</a>.
     │
     ├───man                             <- help-bestanden
     │
-    ├───R
-    │       data.R
-    │       laad_omzet_matrices.R
-    │       util_functies_grenswijzigingen.R
-    │       vertaal_naar_peiljaar.R
-    │       vertaal_naar_peiljaar_limSolve.R
-    │       wrapper_vertaal_naar_peiljaar.R   <- dit is de hoofdfunctie voor het omzetten van grenzen
-    │
-    ├───reports
-    │       .gitkeep
-    │
-    └───uitproberen                     <- oude scripts
+    └───R
+            data.R
+            laad_omzet_matrices.R
+            util_functies_grenswijzigingen.R
+            vertaal_naar_peiljaar.R
+            vertaal_naar_peiljaar_limSolve.R
+            wrapper_vertaal_naar_peiljaar.R   <- dit is de hoofdfunctie voor het omzetten van grenzen
 
 ------------------------------------------------------------------------
-
-<p>
-<small>Project based on the
-<a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter
-data science project template</a>. \#cookiecutterdatascience</small>
-</p>

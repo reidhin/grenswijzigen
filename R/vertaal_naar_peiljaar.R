@@ -19,7 +19,7 @@
 #' @export
 #'
 #' @examples
-#' library(grenswijzigingen)
+#' library(grenswijzigen)
 #' library(cbsodataR)
 #' library(dplyr)
 #'

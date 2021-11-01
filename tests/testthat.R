@@ -1,4 +1,4 @@
 library(testthat)
-library(grenswijzigingen)
+library(grenswijzigen)
 
-test_check("grenswijzigingen")
+test_check("grenswijzigen")

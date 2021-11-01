@@ -41,7 +41,7 @@ wordt geadviseerd gebruik te maken van de generieke wrapper functie
 \code{\link{wrapper_vertaal_naar_peiljaar}}.
 }
 \examples{
-library(grenswijzigingen)
+library(grenswijzigen)
 library(cbsodataR)
 library(dplyr)
 

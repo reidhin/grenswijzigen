@@ -94,7 +94,7 @@ adressen met huisnummertoevoegingen en woonfunctie.
 }
 }
 \examples{
-library(grenswijzigingen)
+library(grenswijzigen)
 library(cbsodataR)
 library(dplyr)
 
