@@ -69,7 +69,7 @@ devtools::install_github("VNG-Realisatie/grenswijzigen")
 
 ### Opzetten project
 
-Indien gewenst kan de gehele code ook vanuit GitLab gecloned worden. We
+Indien gewenst kan de gehele code ook vanuit GitHub gecloned worden. We
 gebruiken Renv voor het versiebeheer van de packages en de R-versie. Om
 direct te kunnen beginnen installeer je alle relevante packages met het
 commando `renv::restore()`.
