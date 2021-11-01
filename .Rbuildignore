@@ -1,0 +1,8 @@
+^grenswijzigen\.Rproj$
+^\.Rproj\.user$
+data_external
+models
+^renv\.lock$
+^LICENSE\.md$
+^data-raw$
+^README\.Rmd$

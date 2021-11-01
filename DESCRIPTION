@@ -1,0 +1,27 @@
+Package: grenswijzigingen
+Title: Indicatoren Op Regionaal Niveau Corrigeren Voor Grenswijzigingen
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Hans",
+           family = "Weda",
+           role = c("aut", "cre"),
+           email = "hans.weda@vng.nl",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: Deze repository bevat de code voor grenswijzigingen.
+License: CC BY-NC-SA 4.0
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
+Imports: 
+    igraph,
+    limSolve,
+    Matrix,
+    utils
+Depends: 
+    R (>= 2.10)
+Suggests: 
+    dplyr,
+    cbsodataR,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

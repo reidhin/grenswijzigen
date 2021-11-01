@@ -1,0 +1,32 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+
+# ignore data
+*.geojson
+*.zip
+*.csv
+*.xls
+*.xlsx
+
+# also ignore R-data
+*.rds
+*.Rdata
+
+# except the models in the models directory
+!models/grenswijziging*.rds
+
+# ignore images
+reports/figures/
+*.jpg
+*.png
+*.jpeg
+*.gif
+
+# ignore pdf's
+*.pdf
+
+# ignore packages
+./renv/library/

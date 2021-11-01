@@ -1,0 +1,164 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+Grenswijzigingen
+==============================
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+Deze repository bevat de code voor grenswijzigingen.
+
+## Modellen
+
+Alle modellen zijn gebasseerd op het volgen van adressen door de tijd heen. Hierdoor kan worden achterhaalt bij welke wijk een adres hoort op in elk jaar. Vervolgens zijn er verschillende manieren om deze informatie te benutten. In deze repository zijn er drie modellen geïmplementeerd voor het uitvoeren van grenswijzigingen. 
+
+* Model.0 gaat uit van een uniforme verdeling van wijkkenmerken over de wijk heen. Dat wil zeggen dat wordt aangenomen dat kenmerken, bijvoorbeeld het aantal 65-plussers, gelijkelijk verdeeld zijn over de wijk. Bij het delen van de wijk in kleinere stukken kunnen deze kenmerken dan evenredig met het aantal adressen in deze stukken worden toegekend. In Model.0 zijn adressen gedefinieerd als postcode + huisnummer. Huisnummertoevoegingen en gebruiksfunctie van adressen worden niet meegenomen. Model.0 is daarmee een heel toegankelijk model dat een redelijk goede grenswijziging uitvoerd, maar dat faalt in geval van wijken met veel huisnummertoevoegingen (bijvoorbeeld hoogbouw of flats) en wijken met veel adressen zonder woonfunctie (bijvoorbeeld winkels, scholen en fabrieken).
+
+* Model.1 werkt gelijk aan Model.0 maar neemt daarentegen wel de huisnummertoevoeging en gebruiksfunctie van het adres mee. In Model.1 worden alleen adressen met een woonfunctie beschouwt. Daarmee presteert Model.1 aanzienlijk beter dan Model.0 voor wijken met veel huisnummertoevoegingen en andere gebruiksfuncties dan wonen. Model.1 gaat echter nog wel altijd uit van een uniforme verdeling van de wijkkenmerken over de wijk heen. Daarnaast wordt er een VNG api gebruikt om de huisnummertoevoegingen en gebruiksfunctie te achterhalen Dat kost het tamelijk veel tijd om uit te voeren voor alle adressen in Nederland. Daarom zijn ook vooraf berekende omzetmatrices beschikbaar gesteld in deze repository.
+
+* Model.2 neemt een andere benadering. Hier worden adressen opgedeeld in blokken gedefinieerd door de overlappingen tussen wijken in het ene jaar en de wijken in het volgende jaar. Voor elk blok wordt een variabele gedefinieerd die het gemiddelde van een wijkkenmerk in dat blok weergeeft. Voor deze variabelen wordt een stelsel formules opgesteld zodat de sommen van de adressen maal de gemiddelden gelijk zijn aan de wijkkenmerken zoals gepubliceerd door het CBS. Daarnaast wordt aangenomen dat deze gemiddelden van jaar tot jaar nauwelijks wijzigen. Dat lijkt een redelijke aanname: bijvoorbeeld het gemiddelde aantal 65-plussers per adres zal van jaar tot jaar ongeveer gelijk zijn. Dit stelsel vergelijkingen wordt opgelost wat tot grensgewijzigde data leidt. In dit model wordt eveneens uitgegaan van adressen met huisnummertoevoegingen en woonfunctie.
+
+## Installatie
+
+### Pakket als bibliotheek
+
+Het pakket van 'grenswijzigingen' kan geïnstalleerd worden vanuit GitHub als:
+
+``` r
+# Install the development version from GitLab
+devtools::install_github("vng-realisatie/grenswijzigen") 
+```
+
+### Opzetten project
+
+Indien gewenst kan de gehele code ook vanuit GitLab gecloned worden. 
+We gebruiken Renv voor het versiebeheer van de packages en de R-versie. 
+Om direct te kunnen beginnen installeer je alle relevante packages met het 
+commando `renv::restore()`.
+
+De hoofdfunctie voor het uitvoeren van de code is de functie 
+`wrapper_vertaal_naar_peiljaar` in het bestand grenswijzigingen.R. Indicatoren 
+die bestaan uit aantallen (bijvoorbeeld aantal inwoners in de wijk of aantal 
+65-plussers in de wijk) worden intern op een andere manier behandeld dan 
+indicatoren die bestaan uit percentages of aandelen (bijvoorbeeld gemiddelde 
+huishoudgrootte of aandeel arbeidsongeschikten per wijk). De functie 
+`wrapper_vertaal_naar_peiljaar` probeert op basis van kolomnamen zelf in te 
+schatten of het om aantallen of aandelen gaat. 
+
+## Voorbeeld
+
+Hieronder staat een basis voorbeeld hoe de code gebruikt kan worden:
+
+```{r example}
+library(grenswijzigingen)
+library(cbsodataR)
+library(dplyr)
+
+kolommen_te_laden <- c(
+  "WijkenEnBuurten", "Gemeentenaam_1",
+  "AantalInwoners_5", "k_65JaarOfOuder_12",
+  "GemiddeldeHuishoudensgrootte_32"
+)
+
+# laad de kerncijfers per wijk voor 2017 en 2018
+df <- rbind(
+  cbs_get_data(
+    id="83765NED",
+    WijkenEnBuurten = has_substring("WK"),
+    select = kolommen_te_laden
+  ) %>% mutate(jaar=2017),
+  cbs_get_data(
+    id="84286NED",
+    WijkenEnBuurten = has_substring("WK"),
+    select = kolommen_te_laden
+  ) %>% mutate(jaar=2018)
+) %>% rename(
+  wijkcode=WijkenEnBuurten,
+  gemeentenaam=Gemeentenaam_1,
+  aantal_inwoners=AantalInwoners_5,
+  aantal_65plus=k_65JaarOfOuder_12
+)
+
+# laat de wijken in Wageningen zien
+print(filter(df, grepl("Wageningen", gemeentenaam)))
+
+# Omzetten van de data van 2017 naar 2018
+df_omgezet <- wrapper_vertaal_naar_peiljaar(
+  as.data.frame(df),
+  peiljaar = 2018,
+  model="model.2"
+)
+
+
+# laat de wijken in Wageningen zien
+print(filter(df_omgezet, grepl("Wageningen", gemeentenaam)))
+
+```
+
+## Contact
+Neem contact met ons op in geval van vragen of opmerkingen.
+
+Voor technische vragen, mail naar hans.weda@vng.nl
+
+Voor project-gerelateerde vragen, mail naar janneke.lummen@vng.nl
+
+
+## Licentie
+
+<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.nl"><img alt="Creative Commons-Licentie" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />Dit werk valt onder een <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.nl">Creative Commons Naamsvermelding-NietCommercieel-GelijkDelen 4.0 Internationaal-licentie</a>.
+
+Project Organization
+------------
+
+    │   DESCRIPTION
+    │   grenswijzigingen.Rproj
+    │   LICENSE.md
+    │   NAMESPACE
+    │   README.md
+    │   README.Rmd                      <- De top-level README voor ontwikkelaars die gebruik maken van het project.
+    │   renv.lock                       
+    │
+    ├───data                            <- Plek waar de omzetmatrices worden opgeslagen  
+    │
+    ├───data-raw
+    │   │   AdresDataOphalen.R
+    │   │   config_grenswijzigingen.R
+    │   │   maak_omzet_matrices.R
+    │   │   main_maak_alle_matrices.R   <- script om de omzetmatrices vanaf de bron opnieuw te maken
+    │   │
+    │   ├───external                    <- de externe data kan hier worden opgeslagen
+    │   │
+    │   └───models
+    │
+    ├───man                             <- help-bestanden
+    │
+    ├───R
+    │       data.R
+    │       laad_omzet_matrices.R
+    │       util_functies_grenswijzigingen.R
+    │       vertaal_naar_peiljaar.R
+    │       vertaal_naar_peiljaar_limSolve.R
+    │       wrapper_vertaal_naar_peiljaar.R   <- dit is de hoofdfunctie voor het omzetten van grenzen
+    │
+    ├───reports
+    │       .gitkeep
+    │
+    └───uitproberen                     <- oude scripts
+    
+    
+--------
+
+<p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
