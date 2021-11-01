@@ -59,7 +59,7 @@ geïmplementeerd voor het uitvoeren van grenswijzigingen.
 
 ### Pakket als bibliotheek
 
-Het pakket van ‘grenswijzigingen’ kan geïnstalleerd worden vanuit GitHub
+Het pakket van ‘grenswijzigen’ kan geïnstalleerd worden vanuit GitHub
 als:
 
 ``` r
