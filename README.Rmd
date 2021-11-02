@@ -21,6 +21,10 @@ Grenswijzigingen
 
 Deze repository bevat de code voor grenswijzigingen.
 
+## Disclaimer
+
+Dit is experimentele code in de testfase waar nog aan gewerkt wordt! 
+
 ## Modellen
 
 Alle modellen zijn gebasseerd op het volgen van adressen door de tijd heen. Hierdoor kan worden achterhaalt bij welke wijk een adres hoort op in elk jaar. Vervolgens zijn er verschillende manieren om deze informatie te benutten. In deze repository zijn er drie modellen geïmplementeerd voor het uitvoeren van grenswijzigingen. 
@@ -64,8 +68,8 @@ Hieronder staat een basis voorbeeld hoe de code gebruikt kan worden:
 
 ```{r example}
 library(grenswijzigen)
-library(cbsodataR)
-library(dplyr)
+require(cbsodataR)
+require(dplyr)
 
 kolommen_te_laden <- c(
   "WijkenEnBuurten", "Gemeentenaam_1",
@@ -110,7 +114,7 @@ print(filter(df_omgezet, grepl("Wageningen", gemeentenaam)))
 
 ## Contact
 Neem contact met ons op in geval van vragen of opmerkingen.
-r
+
 Voor technische vragen, mail naar hans.weda@vng.nl
 
 Voor project-gerelateerde vragen, mail naar janneke.lummen@vng.nl

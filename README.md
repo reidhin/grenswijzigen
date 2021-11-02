@@ -8,7 +8,9 @@
 
 Deze repository bevat de code voor grenswijzigingen.
 
-Dit is experimentele code waar nog aan gewerkt wordt!
+## Disclaimer
+
+Dit is experimentele code in de testfase waar nog aan gewerkt wordt!
 
 ## Modellen
 
@@ -71,7 +73,7 @@ devtools::install_github("VNG-Realisatie/grenswijzigen")
 
 ### Opzetten project
 
-Indien gewenst kan de gehele code ook vanuit GitLab gecloned worden. We
+Indien gewenst kan de gehele code ook vanuit GitHub gecloned worden. We
 gebruiken Renv voor het versiebeheer van de packages en de R-versie. Om
 direct te kunnen beginnen installeer je alle relevante packages met het
 commando `renv::restore()`.
@@ -91,8 +93,12 @@ Hieronder staat een basis voorbeeld hoe de code gebruikt kan worden:
 
 ``` r
 library(grenswijzigen)
-library(cbsodataR)
-library(dplyr)
+require(cbsodataR)
+#> Loading required package: cbsodataR
+#> Warning: package 'cbsodataR' was built under R version 4.0.5
+require(dplyr)
+#> Loading required package: dplyr
+#> Warning: package 'dplyr' was built under R version 4.0.5
 #> 
 #> Attaching package: 'dplyr'
 #> The following objects are masked from 'package:stats':
