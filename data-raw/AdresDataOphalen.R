@@ -32,7 +32,7 @@ remove_digits <- function(x) {
 
 
 
-laad_adressen <- function(jaren=2016:2020) {
+laad_adressen <- function(jaren=2016:2021) {
   "
   Deze functie haalt de data op die adressen aan wijken en buurten koppelt.
   Deze data is per jaar beschikbaar. De adressen zijn gedefinieerd als postcode
@@ -53,7 +53,7 @@ laad_adressen <- function(jaren=2016:2020) {
   # lees de data in
   dt <- data.table()
   for (row in 1:nrow(adressen_CBS)) {
-    print(sprintf("Processing %s", adressen_CBS[row, "year"]))
+    writeLines(sprintf("Processing %s", adressen_CBS[row, "jaar"]))
 
     full.file.name <- file.path(
       raw_data_dir, adressen_CBS[row, "path"], adressen_CBS[row, "pc6hnr"]
@@ -95,9 +95,15 @@ laad_adressen <- function(jaren=2016:2020) {
     pc6hnr[, "Jaar" := adressen_CBS[row, "jaar"]]
 
     # read gemeente info
-    gemeentes <- fread(
-      file.path(raw_data_dir, adressen_CBS[row, "path"], adressen_CBS[row, "gemeente"])
-    )
+    if (grepl(".dbf$", adressen_CBS[row, "gemeente"])) {
+      gemeentes <- read.dbf(
+        file.path(raw_data_dir, adressen_CBS[row, "path"], adressen_CBS[row, "gemeente"])
+      )
+    } else {
+      gemeentes <- fread(
+        file.path(raw_data_dir, adressen_CBS[row, "path"], adressen_CBS[row, "gemeente"])
+      )
+    }
 
     # change column names if necessary
     if ("GEMEENTECO" %in% names(gemeentes)) {

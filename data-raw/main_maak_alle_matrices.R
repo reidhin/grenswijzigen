@@ -8,6 +8,7 @@ Datum: 29 september 2021
 
 # libraries
 library(data.table)
+library(foreign)
 library(usethis)
 
 # maak de environment leeg
@@ -20,8 +21,8 @@ source(file.path("data-raw", "maak_omzet_matrices.R"))
 cache <- TRUE
 
 # Van welke jaren moeten matrices gemaakt worden?
-van_jaren <- 2017:2019
-naar_jaren <- 2018:2020
+van_jaren <- 2016:2020
+naar_jaren <- 2017:2021
 
 # welke regionale niveaus?
 regionale_niveaus <- c("gemeente", "wijk")
