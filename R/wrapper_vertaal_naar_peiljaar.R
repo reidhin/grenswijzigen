@@ -124,6 +124,23 @@ wrapper_vertaal_naar_peiljaar <- function(
   kolommen_aandeel = NULL
 ) {
 
+  # check de input
+  if (!("jaar" %in% names(df))) {
+    stop(
+      "Het is noodzakelijk dat het data-frame naast de indicatoren ook de kolommen 'jaar' en 'wijkcode' bevat. ",
+      "Het 'jaar' refereert aan de wijkindeling die voor de indicatoren gebruikt is."
+    )
+  }
+
+  if (!("wijkcode" %in% names(df))) {
+    stop(
+      "Het is noodzakelijk dat het data-frame naast de indicatoren ook de kolommen 'jaar' en 'wijkcode' bevat. ",
+      "De wijkcode bevat de ",
+      "[gwb-code](https://www.cbs.nl/nl-nl/dossier/nederland-regionaal/gemeente/gemeenten-en-regionale-indelingen/codering-gebieden) ",
+      "van de wijk in de vorm 'WK036375'."
+    )
+  }
+
   # vorm de gwb_code om voor een merge
   df$gwb_code <- as.numeric(gsub("\\D", "", df$wijkcode))
 

@@ -89,16 +89,19 @@ van kolomnamen zelf in te schatten of het om aantallen of aandelen gaat.
 
 ## Voorbeeld
 
-Hieronder staat een basis voorbeeld hoe de code gebruikt kan worden:
+Hieronder staat een basis voorbeeld hoe de code gebruikt kan worden. Het
+is noodzakelijk dat het data-frame naast de indicatoren ook de kolommen
+‘jaar’ en ‘wijkcode’ bevat. De wijkcode bevat de
+[gwb-code](https://www.cbs.nl/nl-nl/dossier/nederland-regionaal/gemeente/gemeenten-en-regionale-indelingen/codering-gebieden)
+van de wijk. Het ‘jaar’ refereert aan de wijkindeling die voor de
+indicatoren gebruikt is.
 
 ``` r
 library(grenswijzigen)
 require(cbsodataR)
 #> Loading required package: cbsodataR
-#> Warning: package 'cbsodataR' was built under R version 4.0.5
 require(dplyr)
 #> Loading required package: dplyr
-#> Warning: package 'dplyr' was built under R version 4.0.5
 #> 
 #> Attaching package: 'dplyr'
 #> The following objects are masked from 'package:stats':

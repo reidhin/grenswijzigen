@@ -103,7 +103,7 @@ vertaal_naar_peiljaar_limSolve <- function(
   if (dim(df_omtezetten)[1] != sum(dim(mat))){
     stop(
       sprintf(
-        "Let op: alle %sen van 1 jaar moeten aanwezig zijn voor de grensomzetting!!!",
+        "Let op: alle Nederlandse %sen van 1 jaar moeten aanwezig zijn voor de grensomzetting!!!",
         regionaalniveau
       )
     )
