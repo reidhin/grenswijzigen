@@ -135,14 +135,14 @@ vertaal_naar_peiljaar <- function(
   }
 
   # voeg extra kolommen toe
-  df_omgezet[,"berekend"] <- TRUE
-  df_onveranderd[,"berekend"] <- FALSE
+  df_omgezet[,"berekend"] <- rep(TRUE, nrow(df_omgezet))
+  df_onveranderd[,"berekend"] <- rep(FALSE, nrow(df_onveranderd))
 
   # voeg de dataframes weer samen
   df <- rbind(df_onveranderd, df_omgezet)
 
   # voeg extra kolommen toe
-  df[,"jaar"] <- oorspronkelijk_jaar
+  df[,"jaar"] <- rep(oorspronkelijk_jaar, nrow(df))
 
   # print aantal rijen
   writeLines(

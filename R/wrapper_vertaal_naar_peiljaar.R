@@ -141,6 +141,12 @@ wrapper_vertaal_naar_peiljaar <- function(
     )
   }
 
+  if (!(peiljaar %in% df$jaar)) {
+    stop(
+      "Het 'peiljaar' dient aanwezig te zijn in het dataframe 'df'"
+    )
+  }
+
   # vorm de gwb_code om voor een merge
   df$gwb_code <- as.numeric(gsub("\\D", "", df$wijkcode))
 
