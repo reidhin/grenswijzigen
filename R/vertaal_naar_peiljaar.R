@@ -71,6 +71,10 @@ vertaal_naar_peiljaar <- function(
   # zet de data table om naar data frame, indien nodig
   df <- as.data.frame(df)
 
+  # indien het data frame leeg is (1-kolom met gwb-code) retourneer dan een leeg
+  # data frame
+  if (ncol(df) == 1) return(data.frame())
+
   # check de input
   if (!("gwb_code" %in% names(df))) {
     stop(
@@ -78,10 +82,6 @@ vertaal_naar_peiljaar <- function(
       "'gwb_code' bestaat uit een integer die de code van de wijk of gemeente aangeeft."
     )
   }
-
-  # indien het data frame leeg is (1-kolom met gwb-code) retourneer dan een leeg
-  # data frame
-  if (ncol(df) == 1) return(data.frame())
 
   # vind de matrix om oorspronkelijk jaar in peiljaar om te zetten
   if (model=="model.0") {
