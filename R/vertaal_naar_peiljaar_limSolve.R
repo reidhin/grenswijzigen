@@ -167,8 +167,8 @@ vertaal_naar_peiljaar_limSolve <- function(
           & df_omtezetten$gwb_code %in% rownames(mat.groep),
         ]
         F <- c(
-          F.oorspronkelijk[match(F.oorspronkelijk$gwb_code, colnames(mat.groep)), kolom],
-          F.peiljaar[match(F.peiljaar$gwb_code, rownames(mat.groep)), kolom]
+          F.oorspronkelijk[match(colnames(mat.groep), F.oorspronkelijk$gwb_code), kolom],
+          F.peiljaar[match(rownames(mat.groep), F.peiljaar$gwb_code), kolom]
         )
 
         # vind de posities van de NA in vec

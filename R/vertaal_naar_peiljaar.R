@@ -114,7 +114,7 @@ vertaal_naar_peiljaar <- function(
   df_omtezetten <- df[df[,"gwb_code"] %in% as.numeric(colnames(mat)),]
 
   # zet de rijen van df_omtezetten in de goede volgorde
-  df_omtezetten <- df_omtezetten[match(df_omtezetten$gwb_code, colnames(mat)),]
+  df_omtezetten <- df_omtezetten[match(colnames(mat), df_omtezetten$gwb_code),]
 
   # bereid de omgezette data frame voor
   df_omgezet <- data.frame(gwb_code=as.numeric(rownames(mat)))
