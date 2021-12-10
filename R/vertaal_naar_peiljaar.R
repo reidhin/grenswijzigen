@@ -71,6 +71,14 @@ vertaal_naar_peiljaar <- function(
   # zet de data table om naar data frame, indien nodig
   df <- as.data.frame(df)
 
+  # check de input
+  if (!("gwb_code" %in% names(df))) {
+    stop(
+      "Het is noodzakelijk dat het data-frame naast de indicatoren ook de kolom 'gwb_code' bevat. ",
+      "'gwb_code' bestaat uit een integer die de code van de wijk of gemeente aangeeft."
+    )
+  }
+
   # indien het data frame leeg is (1-kolom met gwb-code) retourneer dan een leeg
   # data frame
   if (ncol(df) == 1) return(data.frame())
@@ -114,7 +122,7 @@ vertaal_naar_peiljaar <- function(
   df_omtezetten <- df[df[,"gwb_code"] %in% as.numeric(colnames(mat)),]
 
   # zet de rijen van df_omtezetten in de goede volgorde
-  df_omtezetten <- df_omtezetten[match(df_omtezetten$gwb_code, colnames(mat)),]
+  df_omtezetten <- df_omtezetten[match(colnames(mat), df_omtezetten$gwb_code),]
 
   # bereid de omgezette data frame voor
   df_omgezet <- data.frame(gwb_code=as.numeric(rownames(mat)))

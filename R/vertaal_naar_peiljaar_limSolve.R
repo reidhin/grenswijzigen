@@ -76,6 +76,14 @@ vertaal_naar_peiljaar_limSolve <- function(
          bevatten.")
   }
 
+  # check de input
+  if (!("gwb_code" %in% names(df))) {
+    stop(
+      "Het is noodzakelijk dat het data-frame naast de indicatoren ook de kolom 'gwb_code' bevat. ",
+      "'gwb_code' bestaat uit een integer die de code van de wijk of gemeente aangeeft."
+    )
+  }
+
   # indien het data frame leeg is (enkel twee kolommen: jaar en gwb-code)
   # retourneer dan een leeg data frame
   if (ncol(df) == 2) return(data.frame())
@@ -167,8 +175,8 @@ vertaal_naar_peiljaar_limSolve <- function(
           & df_omtezetten$gwb_code %in% rownames(mat.groep),
         ]
         F <- c(
-          F.oorspronkelijk[match(F.oorspronkelijk$gwb_code, colnames(mat.groep)), kolom],
-          F.peiljaar[match(F.peiljaar$gwb_code, rownames(mat.groep)), kolom]
+          F.oorspronkelijk[match(colnames(mat.groep), F.oorspronkelijk$gwb_code), kolom],
+          F.peiljaar[match(rownames(mat.groep), F.peiljaar$gwb_code), kolom]
         )
 
         # vind de posities van de NA in vec
