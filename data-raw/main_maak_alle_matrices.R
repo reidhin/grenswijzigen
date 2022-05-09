@@ -53,6 +53,15 @@ for (naar_jaar in naar_jaren) {
         regionaalniveau=regionaalniveau
       )
 
+      # maak voor alle combinaties voor postcode uit van_jaar en regio uit
+      # naar-jaar de omzetmatrices
+      maak_omzet_matrices_voor_postcode(
+        van_jaar,
+        naar_jaar,
+        cache=cache,
+        regionaalniveau=regionaalniveau
+      )
+
     }
   }
 }

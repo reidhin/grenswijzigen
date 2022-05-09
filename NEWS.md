@@ -1,3 +1,8 @@
+# Grenswijzigen 0.0.0.9004
+
+* Toevoegen van optie om data op postcode niveau om te zetten naar regionaal
+  niveau (wijk of gemeente).
+
 # Grenswijzigen 0.0.0.9003
 
 * Herstel van een bug - de volgorde van de ingevoerde data-frame doet er nu niet toe.
