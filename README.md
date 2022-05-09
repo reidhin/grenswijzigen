@@ -12,7 +12,7 @@ Deze repository bevat de code voor grenswijzigingen.
 
 Dit is experimentele code in de testfase waar nog aan gewerkt wordt!
 
-## Modellen
+## Modellen voor grenswijzigen
 
 Alle modellen zijn gebasseerd op het volgen van adressen door de tijd
 heen. Hierdoor kan worden achterhaalt bij welke wijk een adres hoort op
@@ -59,6 +59,18 @@ geïmplementeerd voor het uitvoeren van grenswijzigingen.
     tot grensgewijzigde data leidt. In dit model wordt eveneens
     uitgegaan van adressen met huisnummertoevoegingen en woonfunctie.
 
+## Modellen voor omzetten postcode naar regio
+
+In sommige gevallen is data op postcode niveau beschikbaar, vaak betreft
+dat data die op 4-cijferige postcode gepubliceerd is. Deze data kan
+worden omgezet naar regionaal niveau, dat wil zeggen, naar data op wijk-
+of gemeenteniveau. Voor deze omzetting kan dezelfde techniek worden
+gebruikt als voor de grenswijzigingen zoals hierboven beschreven onder
+‘Model.0’.
+
+Voor het omzetten van data op postcode niveau naar regionaalniveau is
+ook een functie opgenomen in dit pakket.
+
 ## Installatie
 
 ### Pakket als bibliotheek
@@ -100,8 +112,10 @@ indicatoren gebruikt is.
 library(grenswijzigen)
 require(cbsodataR)
 #> Loading required package: cbsodataR
+#> Warning: package 'cbsodataR' was built under R version 4.0.5
 require(dplyr)
 #> Loading required package: dplyr
+#> Warning: package 'dplyr' was built under R version 4.0.5
 #> 
 #> Attaching package: 'dplyr'
 #> The following objects are masked from 'package:stats':
