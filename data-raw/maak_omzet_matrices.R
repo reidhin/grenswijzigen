@@ -382,7 +382,7 @@ maak_omzet_matrices_voor_postcode <- function(
     van_jaar,
     '_naar_',
     naar_jaar,
-    '_voor_postcode.rds'
+    '_voor_postcode'
   )
 
   # bestandsnaam van het model
