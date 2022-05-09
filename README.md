@@ -59,18 +59,6 @@ geïmplementeerd voor het uitvoeren van grenswijzigingen.
     tot grensgewijzigde data leidt. In dit model wordt eveneens
     uitgegaan van adressen met huisnummertoevoegingen en woonfunctie.
 
-## Modellen voor omzetten postcode naar regio
-
-In sommige gevallen is data op postcode niveau beschikbaar, vaak betreft
-dat data die op 4-cijferige postcode gepubliceerd is. Deze data kan
-worden omgezet naar regionaal niveau, dat wil zeggen, naar data op wijk-
-of gemeenteniveau. Voor deze omzetting kan dezelfde techniek worden
-gebruikt als voor de grenswijzigingen zoals hierboven beschreven onder
-‘Model.0’.
-
-Voor het omzetten van data op postcode niveau naar regionaalniveau is
-ook een functie opgenomen in dit pakket.
-
 ## Installatie
 
 ### Pakket als bibliotheek
@@ -241,6 +229,80 @@ print(filter(df_omgezet, grepl("Wageningen", gemeentenaam)))
 #> 24    FALSE Wageningen                               WK028912
 ```
 
+## Modellen voor omzetten postcode naar regio
+
+In sommige gevallen is data op postcode niveau beschikbaar, vaak betreft
+dat data die op 4-cijferige postcode gepubliceerd is. Deze data kan
+worden omgezet naar regionaal niveau, dat wil zeggen, naar data op wijk-
+of gemeenteniveau. Voor deze omzetting kan dezelfde techniek worden
+gebruikt als voor de grenswijzigingen zoals hierboven beschreven onder
+‘Model.0’.
+
+Voor het omzetten van data op postcode niveau naar regionaalniveau is
+ook een functie opgenomen in dit pakket. Zie voor een voorbeeld hoe deze
+functie te gebruiken hieronder.
+
+``` r
+# Voor het omzetten van data op postcode niveau naar data op regionaalniveau
+# kan de volgende procedure gebruikt worden
+
+library(grenswijzigen)
+require(cbsodataR)
+require(dplyr)
+
+# laad de bevolkingsgrootte per 4-cijferige postcode
+df.postcode <- cbs_get_data(
+  id = "83502NED",
+  Geslacht = "T001038",
+  Leeftijd = "10000",
+  Postcode = has_substring("PC"),
+  Perioden = "2020JJ00",
+  select = c("Geslacht", "Leeftijd", "Postcode", "Perioden", "Bevolking_1")
+) %>% mutate(
+  Postcode = gsub("\\D", "", Postcode)
+) %>% select("Postcode", "Bevolking_1")
+
+# zet om naar wijk
+df.vertaald = vertaal_postcode_naar_regio_op_peiljaar(
+  df.postcode,
+  oorspronkelijk_jaar = 2020,
+  peiljaar = 2021,
+  type_kolommen = "aantal",
+  regionaalniveau = "wijk"
+)
+#> [1] "Aantal rijen omgezette data-frame: 3243"
+
+# Hieronder staat de omgezette postcode data
+print(head(df.vertaald))
+#>   gwb_code Bevolking_1 jaar
+#> 1     1400   23400.192 2020
+#> 2     1401   19864.358 2020
+#> 3     1402   14374.962 2020
+#> 4     1403   18545.000 2020
+#> 5     1404   11841.837 2020
+#> 6     1405    3996.121 2020
+
+# Voor het vergelijken met data op wijkniveau
+# laad de bevolkingsgrootte uit de KWB-data per wijk
+df.wijk <- cbs_get_data(
+  id="85039NED",
+  WijkenEnBuurten = has_substring("WK"),
+  select = c("WijkenEnBuurten", "AantalInwoners_5")
+)
+
+# Vergelijk deze output met de schatting hierboven.
+print(head(df.wijk %>% arrange(WijkenEnBuurten)))
+#> # A tibble: 6 x 2
+#>   WijkenEnBuurten AantalInwoners_5
+#>   <chr>                      <int>
+#> 1 "WK001400  "               22730
+#> 2 "WK001401  "               19695
+#> 3 "WK001402  "               14055
+#> 4 "WK001403  "               18410
+#> 5 "WK001404  "               12355
+#> 6 "WK001405  "                3290
+```
+
 ## Contact
 
 Neem contact met ons op in geval van vragen of opmerkingen.
@@ -287,6 +349,7 @@ Internationaal-licentie</a>.
             util_functies_grenswijzigingen.R
             vertaal_naar_peiljaar.R
             vertaal_naar_peiljaar_limSolve.R
+            vertaal_postcode_naar_regio_op_peiljaar.R  <- dit is de functie voor het omzetten van data op postcode niveau
             wrapper_vertaal_naar_peiljaar.R   <- dit is de hoofdfunctie voor het omzetten van grenzen
 
 ------------------------------------------------------------------------

@@ -35,11 +35,6 @@ Alle modellen zijn gebasseerd op het volgen van adressen door de tijd heen. Hier
 
 * Model.2 neemt een andere benadering. Hier worden adressen opgedeeld in blokken gedefinieerd door de overlappingen tussen wijken in het ene jaar en de wijken in het volgende jaar. Voor elk blok wordt een variabele gedefinieerd die het gemiddelde van een wijkkenmerk in dat blok weergeeft. Voor deze variabelen wordt een stelsel formules opgesteld zodat de sommen van de adressen maal de gemiddelden gelijk zijn aan de wijkkenmerken zoals gepubliceerd door het CBS. Daarnaast wordt aangenomen dat deze gemiddelden van jaar tot jaar nauwelijks wijzigen. Dat lijkt een redelijke aanname: bijvoorbeeld het gemiddelde aantal 65-plussers per adres zal van jaar tot jaar ongeveer gelijk zijn. Dit stelsel vergelijkingen wordt opgelost wat tot grensgewijzigde data leidt. In dit model wordt eveneens uitgegaan van adressen met huisnummertoevoegingen en woonfunctie.
 
-## Modellen voor omzetten postcode naar regio
-
-In sommige gevallen is data op postcode niveau beschikbaar, vaak betreft dat data die op 4-cijferige postcode gepubliceerd is. Deze data kan worden omgezet naar regionaal niveau, dat wil zeggen, naar data op wijk- of gemeenteniveau. Voor deze omzetting kan dezelfde techniek worden gebruikt als voor de grenswijzigingen zoals hierboven beschreven onder 'Model.0'. 
-
-Voor het omzetten van data op postcode niveau naar regionaalniveau is ook een functie opgenomen in dit pakket.
 
 ## Installatie
 
@@ -119,8 +114,15 @@ df_omgezet <- wrapper_vertaal_naar_peiljaar(
 
 # laat de wijken in Wageningen zien
 print(filter(df_omgezet, grepl("Wageningen", gemeentenaam)))
+```
 
+## Modellen voor omzetten postcode naar regio
 
+In sommige gevallen is data op postcode niveau beschikbaar, vaak betreft dat data die op 4-cijferige postcode gepubliceerd is. Deze data kan worden omgezet naar regionaal niveau, dat wil zeggen, naar data op wijk- of gemeenteniveau. Voor deze omzetting kan dezelfde techniek worden gebruikt als voor de grenswijzigingen zoals hierboven beschreven onder 'Model.0'. 
+
+Voor het omzetten van data op postcode niveau naar regionaalniveau is ook een functie opgenomen in dit pakket. Zie voor een voorbeeld hoe deze functie te gebruiken hieronder.
+
+```{r example_postcode}
 # Voor het omzetten van data op postcode niveau naar data op regionaalniveau
 # kan de volgende procedure gebruikt worden
 
@@ -151,14 +153,6 @@ df.vertaald = vertaal_postcode_naar_regio_op_peiljaar(
 
 # Hieronder staat de omgezette postcode data
 print(head(df.vertaald))
-# gwb_code Bevolking_1 jaar
-# 1     1400   23400.192 2020
-# 2     1401   19864.358 2020
-# 3     1402   14374.962 2020
-# 4     1403   18545.000 2020
-# 5     1404   11841.837 2020
-# 6     1405    3996.121 2020
-
 
 # Voor het vergelijken met data op wijkniveau
 # laad de bevolkingsgrootte uit de KWB-data per wijk
@@ -170,15 +164,6 @@ df.wijk <- cbs_get_data(
 
 # Vergelijk deze output met de schatting hierboven.
 print(head(df.wijk %>% arrange(WijkenEnBuurten)))
-# # A tibble: 6 x 2
-#   WijkenEnBuurten AantalInwoners_5
-#   <chr>                      <int>
-# 1 "WK001400  "               22730
-# 2 "WK001401  "               19695
-# 3 "WK001402  "               14055
-# 4 "WK001403  "               18410
-# 5 "WK001404  "               12355
-# 6 "WK001405  "                3290
 
 ```
 
