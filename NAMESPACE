@@ -2,4 +2,5 @@
 
 export(vertaal_naar_peiljaar)
 export(vertaal_naar_peiljaar_limSolve)
+export(vertaal_postcode_naar_regio_op_peiljaar)
 export(wrapper_vertaal_naar_peiljaar)

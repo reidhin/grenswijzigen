@@ -3,13 +3,15 @@ Script met functies om de omzetmatrices op te halen
 
 Auteur: Hans Weda, rond consulting
 Datum: 8 april 2021
+Update: 9 mei 2022
 "
 
 laad_omzet_matrices <- function(
   van_jaar,
   naar_jaar,
   toevoeging=FALSE,
-  regionaalniveau="wijk"
+  regionaalniveau="wijk",
+  postcode=FALSE
 )  {
   "
   Laden van omzet matrices van het 'van_jaar' naar het 'naar_jaar'.
@@ -25,6 +27,11 @@ laad_omzet_matrices <- function(
       * indien toevoeging = TRUE: De omzetting gebeurt naar rato van het aantal
         volledige adressen met  woonfunctie (PC6 en huisnummer, huisnummertoevoeging).
     regionaalniveau: van welk niveau moeten de matrices geladen worden? Keuze uit 'wijk' en 'gemeente'.
+    postcode:
+      * indien postcode = TRUE; laad de matrices om postcode om te zetten naar regio.
+        Alleen beschikmaar indien toevoeging = FALSE
+      * indien postcode = FALSE; laad matrices om de regionale data om te zetten
+        van het ene naar andere jaar (default)
 
   Returns:
     De matrix voor de omzetting.
@@ -32,24 +39,42 @@ laad_omzet_matrices <- function(
     De kolom-namen zijn de wijkcodes van 'van_jaar'
   "
 
-  if (toevoeging) {
-    matrix.naam <- paste0(
-      "grenswijziging_toevoeging_",
-      regionaalniveau,
-      "_van_",
-      van_jaar,
-      '_naar_',
-      naar_jaar
-    )
+  if (postcode) {
+    # matrix-naam voor de omzetting van postcode naar regio
+    if (toevoeging) {
+      stop("De combinatie postcode=TRUE en toevoeging=TRUE is niet beschikbaar.")
+    } else {
+      matrix.naam <- paste0(
+        "grenswijziging_",
+        regionaalniveau,
+        "_van_",
+        van_jaar,
+        '_naar_',
+        naar_jaar,
+        '_voor_postcode'
+      )
+    }
   } else {
-    matrix.naam <- paste0(
-      "grenswijziging_",
-      regionaalniveau,
-      "_van_",
-      van_jaar,
-      '_naar_',
-      naar_jaar
-    )
+    # matrix-naam voor de omzetting van het ene naar ander jaar (default)
+    if (toevoeging) {
+      matrix.naam <- paste0(
+        "grenswijziging_toevoeging_",
+        regionaalniveau,
+        "_van_",
+        van_jaar,
+        '_naar_',
+        naar_jaar
+      )
+    } else {
+      matrix.naam <- paste0(
+        "grenswijziging_",
+        regionaalniveau,
+        "_van_",
+        van_jaar,
+        '_naar_',
+        naar_jaar
+      )
+    }
   }
 
   if (!exists(matrix.naam)) {

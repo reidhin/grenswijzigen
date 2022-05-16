@@ -345,3 +345,173 @@ maak_omzet_matrices_toevoeging <- function(
 
   return(NULL)
 }
+
+
+
+maak_omzet_matrices_voor_postcode <- function(
+  van_jaar,
+  naar_jaar,
+  cache=TRUE,
+  regionaalniveau="wijk"
+)  {
+  "
+  Creëren van omzet matrices van het 'van_jaar' naar het 'naar_jaar'.
+  De omzetting gebeurt naar rato van het aantal adressen (PC6 en huisnummer).
+  Woonfunctie of toevoeging aan het huisnummer worden niet meegenomen.
+  De omzet-matrices zijn op van postcode niveau naar wijk- of gemeenteniveau.
+
+  Parameters:
+    van_jaar: int met jaar van waar het moet worden omgezet
+    naar_jaar: int met jaar waar naar toe het moet worden omgezet
+    cache: indien cache=T, laadt de matrix vanuit een lokaal bestand
+    regionaalniveau: op welk regionaalniveau moet de omzetting plaats vinden?
+      Keuze uit 'wijk' en 'gemeente'.
+
+
+  Returns:
+    De matrix voor de omzetting.
+    De rij-namen zijn de gwbcodes van 'naar_jaar'
+    De kolom-namen zijn de 4-cijferige postcodes van 'van_jaar'
+  "
+
+  # de naam van het matrix object
+  matrix.naam <- paste0(
+    "grenswijziging_",
+    regionaalniveau,
+    "_van_",
+    van_jaar,
+    '_naar_',
+    naar_jaar,
+    '_voor_postcode'
+  )
+
+  # bestandsnaam van het model
+  full.file.name <- file.path(model_dir, paste0(matrix.naam, '.rds'))
+
+  # check of het cache bestand bestaat voor dit jaar
+  if(!file.exists(full.file.name)){
+    # bestand bestaat niet
+    print(
+      sprintf(
+        "Het bestand %s bestaat niet; opnieuw maken vanuit adres-bestanden",
+        full.file.name
+      )
+    )
+    cache = FALSE
+  }
+
+  if (cache) {
+    print(
+      sprintf(
+        "Lees het bestand %s in van cache", full.file.name
+      )
+    )
+    mat <- readRDS(full.file.name)
+    return(mat)
+  } else {
+    print(
+      "Maak de omzet matrix voor postcodes opnieuw vanuit de bestanden"
+    )
+  }
+
+  print(
+    sprintf(
+      "Bereken de matrix voor de omzetting van postcode naar wijkcode uit jaar %d naar jaar %d",
+      van_jaar,
+      naar_jaar
+    )
+  )
+
+  # laad de adresbestanden
+  dt_adres <- laad_adressen(jaren=c(van_jaar, naar_jaar))
+
+  # Voeg de peilgemeente-code toe aan de data-table
+  peildata <- dt_adres[
+    Jaar==naar_jaar,
+    .(PC, Huisnummer, Gemeente, Wijk, Buurt)
+  ]
+  setnames(
+    peildata,
+    c("Gemeente", "Wijk", "Buurt"),
+    c("Gemeente_peil", "Wijk_peil", "Buurt_peil")
+  )
+  dt_adres <- merge(dt_adres[Jaar==van_jaar], peildata, by=c("PC", "Huisnummer"))
+
+  # voeg 4-cijferige postcode toe
+  dt_adres[,PC4:=substr(PC, 1, 4)]
+
+  if (regionaalniveau=="wijk") {
+    # maak de matrix
+    mat <- as.matrix(
+      dcast(
+        dt_adres[, .N, by=.(PC4, Wijk_peil)],
+        Wijk_peil ~ PC4,
+        value.var = "N",
+        fill=0
+      ),
+      rownames = "Wijk_peil"
+    )
+  } else if (regionaalniveau=="gemeente") {
+    # maak de matrix
+    mat <- as.matrix(
+      dcast(
+        dt_adres[, .N, by=.(PC4, Gemeente_peil)],
+        Gemeente_peil ~ PC4,
+        value.var = "N",
+        fill=0
+      ),
+      rownames = "Gemeente_peil"
+    )
+  } else {
+    stop("verkeerde regionaalniveau")
+  }
+
+
+  # sla de matrix op voor later gebruik
+  saveRDS(mat, full.file.name)
+
+  # geef het matrix object de matrix.naam
+  assign(matrix.naam, mat)
+
+  # voeg toe aan het pakket
+  do.call("use_data", list(as.name(matrix.naam), overwrite = TRUE))
+
+  # voeg documentatie toe
+  data.documentatie <- readLines("R/data.R")
+
+  if (!any(grepl(matrix.naam, data.documentatie))) {
+    # Deze dataset is nog niet in de documentatie opgenomen.
+
+    # Regels om toe te voegen
+    doc.plus = c(
+      sprintf(
+        "#' Matrix omzetting postcode naar regio %s-%s",
+        van_jaar,
+        naar_jaar
+      ),
+      "#' ",
+      sprintf(
+        "#' Een matrix voor het omzetten van indicatoren vanuit postcode uit jaar %s naar jaar %s voor regio %s",
+        van_jaar,
+        naar_jaar,
+        regionaalniveau
+      ),
+      "#' De omzetting gebeurt naar rato van het aantal adressen (PC6 en huisnummer).",
+      "#' Woonfunctie of toevoeging aan het huisnummer worden niet meegenomen.",
+      sprintf("#' De omzet-matrices zijn op %sniveau.", regionaalniveau),
+      "#' ",
+      "#' @docType data",
+      "#' ",
+      sprintf("#' @usage data(%s)", matrix.naam),
+      "#' ",
+      sprintf("\"%s\"", matrix.naam)
+    )
+
+    writeLines(c(data.documentatie, doc.plus), "R/data.R")
+  }
+
+
+
+  return(NULL)
+
+}

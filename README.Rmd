@@ -25,7 +25,7 @@ Deze repository bevat de code voor grenswijzigingen.
 
 Dit is experimentele code in de testfase waar nog aan gewerkt wordt! 
 
-## Modellen
+## Modellen voor grenswijzigen
 
 Alle modellen zijn gebasseerd op het volgen van adressen door de tijd heen. Hierdoor kan worden achterhaalt bij welke wijk een adres hoort op in elk jaar. Vervolgens zijn er verschillende manieren om deze informatie te benutten. In deze repository zijn er drie modellen geïmplementeerd voor het uitvoeren van grenswijzigingen. 
 
@@ -34,6 +34,7 @@ Alle modellen zijn gebasseerd op het volgen van adressen door de tijd heen. Hier
 * Model.1 werkt gelijk aan Model.0 maar neemt daarentegen wel de huisnummertoevoeging en gebruiksfunctie van het adres mee. In Model.1 worden alleen adressen met een woonfunctie beschouwt. Daarmee presteert Model.1 aanzienlijk beter dan Model.0 voor wijken met veel huisnummertoevoegingen en andere gebruiksfuncties dan wonen. Model.1 gaat echter nog wel altijd uit van een uniforme verdeling van de wijkkenmerken over de wijk heen. Daarnaast wordt er een VNG api gebruikt om de huisnummertoevoegingen en gebruiksfunctie te achterhalen Dat kost het tamelijk veel tijd om uit te voeren voor alle adressen in Nederland. Daarom zijn ook vooraf berekende omzetmatrices beschikbaar gesteld in deze repository.
 
 * Model.2 neemt een andere benadering. Hier worden adressen opgedeeld in blokken gedefinieerd door de overlappingen tussen wijken in het ene jaar en de wijken in het volgende jaar. Voor elk blok wordt een variabele gedefinieerd die het gemiddelde van een wijkkenmerk in dat blok weergeeft. Voor deze variabelen wordt een stelsel formules opgesteld zodat de sommen van de adressen maal de gemiddelden gelijk zijn aan de wijkkenmerken zoals gepubliceerd door het CBS. Daarnaast wordt aangenomen dat deze gemiddelden van jaar tot jaar nauwelijks wijzigen. Dat lijkt een redelijke aanname: bijvoorbeeld het gemiddelde aantal 65-plussers per adres zal van jaar tot jaar ongeveer gelijk zijn. Dit stelsel vergelijkingen wordt opgelost wat tot grensgewijzigde data leidt. In dit model wordt eveneens uitgegaan van adressen met huisnummertoevoegingen en woonfunctie.
+
 
 ## Installatie
 
@@ -113,6 +114,56 @@ df_omgezet <- wrapper_vertaal_naar_peiljaar(
 
 # laat de wijken in Wageningen zien
 print(filter(df_omgezet, grepl("Wageningen", gemeentenaam)))
+```
+
+## Modellen voor omzetten postcode naar regio
+
+In sommige gevallen is data op postcode niveau beschikbaar, vaak betreft dat data die op 4-cijferige postcode gepubliceerd is. Deze data kan worden omgezet naar regionaal niveau, dat wil zeggen, naar data op wijk- of gemeenteniveau. Voor deze omzetting kan dezelfde techniek worden gebruikt als voor de grenswijzigingen zoals hierboven beschreven onder 'Model.0'. 
+
+Voor het omzetten van data op postcode niveau naar regionaalniveau is ook een functie opgenomen in dit pakket. Zie voor een voorbeeld hoe deze functie te gebruiken hieronder.
+
+```{r example_postcode}
+# Voor het omzetten van data op postcode niveau naar data op regionaalniveau
+# kan de volgende procedure gebruikt worden
+
+library(grenswijzigen)
+require(cbsodataR)
+require(dplyr)
+
+# laad de bevolkingsgrootte per 4-cijferige postcode
+df.postcode <- cbs_get_data(
+  id = "83502NED",
+  Geslacht = "T001038",
+  Leeftijd = "10000",
+  Postcode = has_substring("PC"),
+  Perioden = "2020JJ00",
+  select = c("Geslacht", "Leeftijd", "Postcode", "Perioden", "Bevolking_1")
+) %>% mutate(
+  Postcode = gsub("\\D", "", Postcode)
+) %>% select("Postcode", "Bevolking_1")
+
+# zet om naar wijk
+df.vertaald = vertaal_postcode_naar_regio_op_peiljaar(
+  df.postcode,
+  oorspronkelijk_jaar = 2020,
+  peiljaar = 2021,
+  type_kolommen = "aantal",
+  regionaalniveau = "wijk"
+)
+
+# Hieronder staat de omgezette postcode data
+print(head(df.vertaald))
+
+# Voor het vergelijken met data op wijkniveau
+# laad de bevolkingsgrootte uit de KWB-data per wijk
+df.wijk <- cbs_get_data(
+  id="85039NED",
+  WijkenEnBuurten = has_substring("WK"),
+  select = c("WijkenEnBuurten", "AantalInwoners_5")
+)
+
+# Vergelijk deze output met de schatting hierboven.
+print(head(df.wijk %>% arrange(WijkenEnBuurten)))
 
 ```
 
@@ -159,6 +210,7 @@ Project Organization
             util_functies_grenswijzigingen.R
             vertaal_naar_peiljaar.R
             vertaal_naar_peiljaar_limSolve.R
+            vertaal_postcode_naar_regio_op_peiljaar.R  <- dit is de functie voor het omzetten van data op postcode niveau
             wrapper_vertaal_naar_peiljaar.R   <- dit is de hoofdfunctie voor het omzetten van grenzen
 
 
