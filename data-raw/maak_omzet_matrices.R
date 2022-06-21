@@ -388,31 +388,6 @@ maak_omzet_matrices_voor_postcode <- function(
   # bestandsnaam van het model
   full.file.name <- file.path(model_dir, paste0(matrix.naam, '.rds'))
 
-  # check of het cache bestand bestaat voor dit jaar
-  if(!file.exists(full.file.name)){
-    # bestand bestaat niet
-    print(
-      sprintf(
-        "Het bestand %s bestaat niet; opnieuw maken vanuit adres-bestanden",
-        full.file.name
-      )
-    )
-    cache = FALSE
-  }
-
-  if (cache) {
-    print(
-      sprintf(
-        "Lees het bestand %s in van cache", full.file.name
-      )
-    )
-    mat <- readRDS(full.file.name)
-    return(mat)
-  } else {
-    print(
-      "Maak de omzet matrix voor postcodes opnieuw vanuit de bestanden"
-    )
-  }
 
   print(
     sprintf(

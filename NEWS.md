@@ -1,3 +1,8 @@
+# Grenswijzigen 0.0.0.9005
+
+* Reparatie bug: het is nu ook mogelijk om data op postcode niveau uit jaar x
+  om te zetten naar regionaal niveau (wijk of gemeente) voor hetzelfde jaar x.
+
 # Grenswijzigen 0.0.0.9004
 
 * Toevoegen van optie om data op postcode niveau om te zetten naar regionaal
