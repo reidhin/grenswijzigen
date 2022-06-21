@@ -3,7 +3,7 @@ Dit script is bedoeld om de benodigde omzetmatrices te maken vanuit de
 bronnen.
 
 Auteur: Hans Weda, rond consulting
-Datum: 29 september 2021
+Datum: 21 juni 2022
 "
 
 # libraries
@@ -32,6 +32,8 @@ if (!exists("R/data.R")) {
   writeLines("", "R/data.R")
 }
 
+
+# maak omzetmatrices voor regionale niveaus
 for (naar_jaar in naar_jaren) {
   for (van_jaar in min(van_jaren):(naar_jaar-1)) {
     for (regionaalniveau in regionale_niveaus) {
@@ -53,6 +55,15 @@ for (naar_jaar in naar_jaren) {
         regionaalniveau=regionaalniveau
       )
 
+    }
+  }
+}
+
+# maak omzetmatrices voor postcode omzettingen
+for (naar_jaar in naar_jaren) {
+  for (van_jaar in min(van_jaren):naar_jaar) {
+    for (regionaalniveau in regionale_niveaus) {
+
       # maak voor alle combinaties voor postcode uit van_jaar en regio uit
       # naar-jaar de omzetmatrices
       maak_omzet_matrices_voor_postcode(
@@ -65,6 +76,7 @@ for (naar_jaar in naar_jaren) {
     }
   }
 }
+
 
 # werk de documentatie bij
 devtools::document()
