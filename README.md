@@ -23,7 +23,7 @@ grondgebied willen opdelen in wijken en buurten. Wellicht doordat het
 aantal gemeenten af neemt, is er behoefte een gemeente op te delen in
 meer wijken.
 
-![](man/figures/trends.png)
+![](man/figures/README-trends.png)
 
 Door deze ontwikkelingen wijzigen de grenzen van gemeenten en wijken
 regelmatig . Dat heeft consequenties als men de huidige wijkkenmerken
@@ -35,7 +35,7 @@ de gemiddelde huishoudgrootte of de gemiddelde huizenprijs in een wijk.
 Zie voorbeeld hieronder waarbij de gemeente Haaren van 2020 naar 2021
 opgaat in de vier gemeenten Boxtel, Oisterwijk, Tilburg, en Vught.
 
-![](man/figures/example.png)
+![](man/figures/README-example.png)
 
 Het CBS rapporteert de wijzigingen in gemeentegrenzen en hoe
 wijkkenmerken over de jaren heen vergeleken kunnen worden. Voor de

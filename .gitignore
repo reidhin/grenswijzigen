@@ -25,6 +25,7 @@ reports/figures/
 *.png
 *.jpeg
 *.gif
+!man/figures/README-*.png
 
 # ignore pdf's
 *.pdf
