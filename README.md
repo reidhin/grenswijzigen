@@ -8,13 +8,61 @@
 
 Deze repository bevat de code voor grenswijzigingen.
 
-## Disclaimer
+## Introductie
 
-Dit is experimentele code in de testfase waar nog aan gewerkt wordt!
+Het grondgebied van Nederland kan op diverse manieren worden opgedeeld.
+De opdeling waar het in deze repository over gaat is de opsplitsing in
+gemeenten, wijken en buurten. Daarbij geldt dat buurten optellen tot
+wijken en wijken optellen tot gemeenten.
+
+Deze indeling ligt niet vast. Het aantal gemeenten neemt de laatste
+jaren af door fusies. Een grotere gemeente kan taken die worden
+toegewezen aan gemeenten gemakkelijker oppakken. Het aantal wijken neemt
+geleidelijk aan toe. Een gemeente kan zelf bepalen hoe zij hun
+grondgebied willen opdelen in wijken en buurten. Wellicht doordat het
+aantal gemeenten af neemt, is er behoefte een gemeente op te delen in
+meer wijken.
+
+![](man/figures/README-trends.png)
+
+Door deze ontwikkelingen wijzigen de grenzen van gemeenten en wijken
+regelmatig . Dat heeft consequenties als men de huidige wijkkenmerken
+wil vergelijken met het verleden. Immers, de huidige wijk bestond
+mogelijk nog niet in voorgaande jaren. Daarmee is het lastig om trends
+in de ontwikkelingen in wijkkenmerken scherp te ontwaren. Bij
+wijkkenmerken kan men bijvoorbeeld denken aan het aandeel 65-plussers,
+de gemiddelde huishoudgrootte of de gemiddelde huizenprijs in een wijk.
+Zie voorbeeld hieronder waarbij de gemeente Haaren van 2020 naar 2021
+opgaat in de vier gemeenten Boxtel, Oisterwijk, Tilburg, en Vught.
+
+![](man/figures/README-example.png)
+
+Het CBS rapporteert de wijzigingen in gemeentegrenzen en hoe
+wijkkenmerken over de jaren heen vergeleken kunnen worden. Voor de
+wijkgrenzen is er geen jaarlijkse publicatie over hoe wijkkenmerken over
+de jaren heen vergeleken kunnen worden. Het CBS geeft enkel aan of de
+cijfers vergeleken mogen worden met het jaar daarvoor. Als de cijfers
+niet vergelijkbaar zijn met het vorige jaar wordt niet aangegeven hoe
+deze getransformeerd moeten worden.
+
+In principe kan het CBS of de gemeente op basis van zogenaamde microdata
+exact uitrekenen wat de wijkkenmerken van vorige jaren zijn voor de
+huidige wijkgrenzen. Deze microdata bestaat uit kenmerken op persoons-
+of huishoudensniveau. Voor het rekenen met microdata moeten de privacy
+regels goed gewaarborgd worden.
+
+Indien er geen beschikking is over microdata, of als men niet met
+privacy gevoelige data wil of kan rekenen, kunnen er toch schattingen
+worden gemaakt van de wijkkenmerken van vorige jaren met de huidige
+wijkgrenzen. Deze repository bevat R-script waarmee dergelijke
+schattingen gemaakt kunnen worden.
+
+Zie deze link voor een dashboard die grenswijzigingen inzichtelijk maakt
+<https://datamonitoringvng.shinyapps.io/grenswijzigingen/>
 
 ## Modellen voor grenswijzigen
 
-Alle modellen zijn gebasseerd op het volgen van adressen door de tijd
+Alle modellen zijn gebaseerd op het volgen van adressen door de tijd
 heen. Hierdoor kan worden achterhaalt bij welke wijk een adres hoort op
 in elk jaar. Vervolgens zijn er verschillende manieren om deze
 informatie te benutten. In deze repository zijn er drie modellen
@@ -100,10 +148,8 @@ indicatoren gebruikt is.
 library(grenswijzigen)
 require(cbsodataR)
 #> Loading required package: cbsodataR
-#> Warning: package 'cbsodataR' was built under R version 4.0.5
 require(dplyr)
 #> Loading required package: dplyr
-#> Warning: package 'dplyr' was built under R version 4.0.5
 #> 
 #> Attaching package: 'dplyr'
 #> The following objects are masked from 'package:stats':
@@ -140,23 +186,25 @@ df <- rbind(
 
 # laat de wijken in Wageningen zien
 print(filter(df, grepl("Wageningen", gemeentenaam)))
-#> # A tibble: 14 x 6
-#>    wijkcode  gemeentenaam   aantal_inwoners aantal_65plus GemiddeldeHuish~  jaar
-#>    <chr>     <chr>                    <int>         <int>            <dbl> <dbl>
-#>  1 "WK02890~ "Wageningen  ~           33885          5125              1.7  2017
-#>  2 "WK02890~ "Wageningen  ~            4570           800              1.9  2017
-#>  3 "WK02890~ "Wageningen  ~            4725           440              2.3  2018
-#>  4 "WK02890~ "Wageningen  ~            2480             5              1.1  2018
-#>  5 "WK02890~ "Wageningen  ~            2750           545              2.2  2018
-#>  6 "WK02890~ "Wageningen  ~            2085           365              2.2  2018
-#>  7 "WK02890~ "Wageningen  ~            3170            35              1.4  2018
-#>  8 "WK02890~ "Wageningen  ~            6890          1435              1.7  2018
-#>  9 "WK02890~ "Wageningen  ~            5185           755              1.8  2018
-#> 10 "WK02890~ "Wageningen  ~            2505           560              1.6  2018
-#> 11 "WK02890~ "Wageningen  ~            3530           510              1.4  2018
-#> 12 "WK02891~ "Wageningen  ~            2520           710              1.9  2018
-#> 13 "WK02891~ "Wageningen  ~            1175           410              2.3  2018
-#> 14 "WK02891~ "Wageningen  ~            1365           385              2.1  2018
+#> # A tibble: 14 × 6
+#>    wijkcode     gemeentenaam                       aanta…¹ aanta…² Gemid…³  jaar
+#>    <chr>        <chr>                                <int>   <int>   <dbl> <dbl>
+#>  1 "WK028900  " "Wageningen                      …   33885    5125     1.7  2017
+#>  2 "WK028901  " "Wageningen                      …    4570     800     1.9  2017
+#>  3 "WK028901  " "Wageningen                      …    4725     440     2.3  2018
+#>  4 "WK028902  " "Wageningen                      …    2480       5     1.1  2018
+#>  5 "WK028903  " "Wageningen                      …    2750     545     2.2  2018
+#>  6 "WK028904  " "Wageningen                      …    2085     365     2.2  2018
+#>  7 "WK028905  " "Wageningen                      …    3170      35     1.4  2018
+#>  8 "WK028906  " "Wageningen                      …    6890    1435     1.7  2018
+#>  9 "WK028907  " "Wageningen                      …    5185     755     1.8  2018
+#> 10 "WK028908  " "Wageningen                      …    2505     560     1.6  2018
+#> 11 "WK028909  " "Wageningen                      …    3530     510     1.4  2018
+#> 12 "WK028910  " "Wageningen                      …    2520     710     1.9  2018
+#> 13 "WK028911  " "Wageningen                      …    1175     410     2.3  2018
+#> 14 "WK028912  " "Wageningen                      …    1365     385     2.1  2018
+#> # … with abbreviated variable names ¹​aantal_inwoners, ²​aantal_65plus,
+#> #   ³​GemiddeldeHuishoudensgrootte_32
 
 # Omzetten van de data van 2017 naar 2018
 df_omgezet <- wrapper_vertaal_naar_peiljaar(
@@ -292,13 +340,13 @@ df.wijk <- cbs_get_data(
 
 # Vergelijk deze output met de schatting hierboven.
 print(head(df.wijk %>% arrange(WijkenEnBuurten)))
-#> # A tibble: 6 x 2
+#> # A tibble: 6 × 2
 #>   WijkenEnBuurten AantalInwoners_5
 #>   <chr>                      <int>
-#> 1 "WK001400  "               22730
+#> 1 "WK001400  "               22735
 #> 2 "WK001401  "               19695
 #> 3 "WK001402  "               14055
-#> 4 "WK001403  "               18410
+#> 4 "WK001403  "               18405
 #> 5 "WK001404  "               12355
 #> 6 "WK001405  "                3290
 ```

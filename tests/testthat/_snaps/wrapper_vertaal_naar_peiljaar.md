@@ -4,22 +4,24 @@
       filter(df, grepl("Wageningen", gemeentenaam))
     Output
       # A tibble: 14 x 6
-         wijkcode  gemeentenaam   aantal_inwoners aantal_65plus GemiddeldeHuish~  jaar
-         <chr>     <chr>                    <int>         <int>            <dbl> <dbl>
-       1 "WK02890~ "Wageningen  ~           33885          5125              1.7  2017
-       2 "WK02890~ "Wageningen  ~            4570           800              1.9  2017
-       3 "WK02890~ "Wageningen  ~            4725           440              2.3  2018
-       4 "WK02890~ "Wageningen  ~            2480             5              1.1  2018
-       5 "WK02890~ "Wageningen  ~            2750           545              2.2  2018
-       6 "WK02890~ "Wageningen  ~            2085           365              2.2  2018
-       7 "WK02890~ "Wageningen  ~            3170            35              1.4  2018
-       8 "WK02890~ "Wageningen  ~            6890          1435              1.7  2018
-       9 "WK02890~ "Wageningen  ~            5185           755              1.8  2018
-      10 "WK02890~ "Wageningen  ~            2505           560              1.6  2018
-      11 "WK02890~ "Wageningen  ~            3530           510              1.4  2018
-      12 "WK02891~ "Wageningen  ~            2520           710              1.9  2018
-      13 "WK02891~ "Wageningen  ~            1175           410              2.3  2018
-      14 "WK02891~ "Wageningen  ~            1365           385              2.1  2018
+         wijkcode     gemeentenaam                       aanta~1 aanta~2 Gemid~3  jaar
+         <chr>        <chr>                                <int>   <int>   <dbl> <dbl>
+       1 "WK028900  " "Wageningen                      ~   33885    5125     1.7  2017
+       2 "WK028901  " "Wageningen                      ~    4570     800     1.9  2017
+       3 "WK028901  " "Wageningen                      ~    4725     440     2.3  2018
+       4 "WK028902  " "Wageningen                      ~    2480       5     1.1  2018
+       5 "WK028903  " "Wageningen                      ~    2750     545     2.2  2018
+       6 "WK028904  " "Wageningen                      ~    2085     365     2.2  2018
+       7 "WK028905  " "Wageningen                      ~    3170      35     1.4  2018
+       8 "WK028906  " "Wageningen                      ~    6890    1435     1.7  2018
+       9 "WK028907  " "Wageningen                      ~    5185     755     1.8  2018
+      10 "WK028908  " "Wageningen                      ~    2505     560     1.6  2018
+      11 "WK028909  " "Wageningen                      ~    3530     510     1.4  2018
+      12 "WK028910  " "Wageningen                      ~    2520     710     1.9  2018
+      13 "WK028911  " "Wageningen                      ~    1175     410     2.3  2018
+      14 "WK028912  " "Wageningen                      ~    1365     385     2.1  2018
+      # ... with abbreviated variable names 1: aantal_inwoners, 2: aantal_65plus,
+      #   3: GemiddeldeHuishoudensgrootte_32
 
 ---
 
@@ -83,10 +85,12 @@
       filter(df, grepl("^Groningen", gemeentenaam))
     Output
       # A tibble: 2 x 6
-        wijkcode  gemeentenaam   aantal_inwoners aantal_65plus GemiddeldeHuisho~  jaar
-        <chr>     <chr>                    <int>         <int>             <dbl> <dbl>
-      1 "GM0014 ~ "Groningen   ~          202810         25697               1.6  2018
-      2 "GM0014 ~ "Groningen   ~          231299         33349               1.7  2019
+        wijkcode     gemeentenaam                        aanta~1 aanta~2 Gemid~3  jaar
+        <chr>        <chr>                                 <int>   <int>   <dbl> <dbl>
+      1 "GM0014    " "Groningen                        ~  202810   25697     1.6  2018
+      2 "GM0014    " "Groningen                        ~  231299   33349     1.7  2019
+      # ... with abbreviated variable names 1: aantal_inwoners, 2: aantal_65plus,
+      #   3: GemiddeldeHuishoudensgrootte_32
 
 ---
 

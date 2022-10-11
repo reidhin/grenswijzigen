@@ -21,13 +21,29 @@ Grenswijzigingen
 
 Deze repository bevat de code voor grenswijzigingen.
 
-## Disclaimer
+## Introductie
 
-Dit is experimentele code in de testfase waar nog aan gewerkt wordt! 
+Het grondgebied van Nederland kan op diverse manieren worden opgedeeld. De opdeling waar het in deze repository over gaat is de opsplitsing in gemeenten, wijken en buurten. Daarbij geldt dat buurten optellen tot wijken en wijken optellen tot gemeenten.
+
+Deze indeling ligt niet vast. Het aantal gemeenten neemt de laatste jaren af door fusies. Een grotere gemeente kan taken die worden toegewezen aan gemeenten gemakkelijker oppakken. Het aantal wijken neemt geleidelijk aan toe. Een gemeente kan zelf bepalen hoe zij hun grondgebied willen opdelen in wijken en buurten. Wellicht doordat het aantal gemeenten af neemt, is er behoefte een gemeente op te delen in meer wijken. 
+
+![](man/figures/README-trends.png)
+
+Door deze ontwikkelingen wijzigen de grenzen van gemeenten en wijken regelmatig . Dat heeft consequenties als men de huidige wijkkenmerken wil vergelijken met het verleden. Immers, de huidige wijk bestond mogelijk nog niet in voorgaande jaren. Daarmee is het lastig om trends in de ontwikkelingen in wijkkenmerken scherp te ontwaren. Bij wijkkenmerken kan men bijvoorbeeld denken aan het aandeel 65-plussers, de gemiddelde huishoudgrootte of de gemiddelde huizenprijs in een wijk. Zie voorbeeld hieronder waarbij de gemeente Haaren van 2020 naar 2021 opgaat in de vier gemeenten Boxtel, Oisterwijk, Tilburg, en Vught.
+
+![](man/figures/README-example.png)
+
+Het CBS rapporteert de wijzigingen in gemeentegrenzen en hoe wijkkenmerken over de jaren heen vergeleken kunnen worden. Voor de wijkgrenzen is er geen jaarlijkse publicatie over hoe wijkkenmerken over de jaren heen vergeleken kunnen worden. Het CBS geeft enkel aan of de cijfers vergeleken mogen worden met het jaar daarvoor. Als de cijfers niet vergelijkbaar zijn met het vorige jaar wordt niet aangegeven hoe deze getransformeerd moeten worden.
+
+In principe kan het CBS of de gemeente op basis van zogenaamde microdata exact uitrekenen wat de wijkkenmerken van vorige jaren zijn voor de huidige wijkgrenzen. Deze microdata bestaat uit kenmerken op persoons- of huishoudensniveau. Voor het rekenen met microdata moeten de privacy regels goed gewaarborgd worden.
+
+Indien er geen beschikking is over microdata, of als men niet met privacy gevoelige data wil of kan rekenen, kunnen er toch schattingen worden gemaakt van de wijkkenmerken van vorige jaren met de huidige wijkgrenzen. Deze repository bevat R-script waarmee dergelijke schattingen gemaakt kunnen worden.
+
+Zie deze link voor een dashboard die grenswijzigingen inzichtelijk maakt [https://datamonitoringvng.shinyapps.io/grenswijzigingen/](https://datamonitoringvng.shinyapps.io/grenswijzigingen/)
 
 ## Modellen voor grenswijzigen
 
-Alle modellen zijn gebasseerd op het volgen van adressen door de tijd heen. Hierdoor kan worden achterhaalt bij welke wijk een adres hoort op in elk jaar. Vervolgens zijn er verschillende manieren om deze informatie te benutten. In deze repository zijn er drie modellen geïmplementeerd voor het uitvoeren van grenswijzigingen. 
+Alle modellen zijn gebaseerd op het volgen van adressen door de tijd heen. Hierdoor kan worden achterhaalt bij welke wijk een adres hoort op in elk jaar. Vervolgens zijn er verschillende manieren om deze informatie te benutten. In deze repository zijn er drie modellen geïmplementeerd voor het uitvoeren van grenswijzigingen. 
 
 * Model.0 gaat uit van een uniforme verdeling van wijkkenmerken over de wijk heen. Dat wil zeggen dat wordt aangenomen dat kenmerken, bijvoorbeeld het aantal 65-plussers, gelijkelijk verdeeld zijn over de wijk. Bij het delen van de wijk in kleinere stukken kunnen deze kenmerken dan evenredig met het aantal adressen in deze stukken worden toegekend. In Model.0 zijn adressen gedefinieerd als postcode + huisnummer. Huisnummertoevoegingen en gebruiksfunctie van adressen worden niet meegenomen. Model.0 is daarmee een heel toegankelijk model dat een redelijk goede grenswijziging uitvoerd, maar dat faalt in geval van wijken met veel huisnummertoevoegingen (bijvoorbeeld hoogbouw of flats) en wijken met veel adressen zonder woonfunctie (bijvoorbeeld winkels, scholen en fabrieken).
 

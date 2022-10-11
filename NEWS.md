@@ -1,3 +1,7 @@
+# Grenswijzigen 0.0.1
+
+* Update en uitbreiding van README
+
 # Grenswijzigen 0.0.0.9005
 
 * Reparatie bug: het is nu ook mogelijk om data op postcode niveau uit jaar x
