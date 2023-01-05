@@ -4,6 +4,7 @@ bronnen.
 
 Auteur: Hans Weda, rond consulting
 Datum: 21 juni 2022
+Update: 5 januari 2023 - toevoegen jaar 2022
 "
 
 # libraries
@@ -21,14 +22,14 @@ source(file.path("data-raw", "maak_omzet_matrices.R"))
 cache <- TRUE
 
 # Van welke jaren moeten matrices gemaakt worden?
-van_jaren <- 2016:2020
-naar_jaren <- 2017:2021
+van_jaren <- 2016:2021
+naar_jaren <- 2017:2022
 
 # welke regionale niveaus?
 regionale_niveaus <- c("gemeente", "wijk")
 
 # check of de data-documentatie al bestaat
-if (!exists("R/data.R")) {
+if (!file.exists("R/data.R")) {
   writeLines("", "R/data.R")
 }
 
