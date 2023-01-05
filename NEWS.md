@@ -1,3 +1,7 @@
+# Grenswijzigen 0.0.2
+
+* Toevoegen van het jaar 2022
+
 # Grenswijzigen 0.0.1
 
 * Update en uitbreiding van README
