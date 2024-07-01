@@ -1655,3 +1655,531 @@
 #' @usage data(grenswijziging_wijk_van_2022_naar_2022_voor_postcode)
 #' 
 "grenswijziging_wijk_van_2022_naar_2022_voor_postcode"
+#' Matrix grenswijzigingen 2016-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren uit jaar 2016 naar jaar 2023 voor regio gemeente
+#' De omzetting gebeurt naar rato van het aantal adressen (PC6 en huisnummer).
+#' Woonfunctie of toevoeging aan het huisnummer worden niet meegenomen.
+#' De omzet-matrices zijn op gemeenteniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_gemeente_van_2016_naar_2023)
+#' 
+"grenswijziging_gemeente_van_2016_naar_2023"
+#' Matrix grenswijzigingen 2016-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren uit jaar 2016 naar jaar 2023 voor regio gemeente.
+#' De omzetting gebeurt naar rato van het aantal volledige adressen met
+#' woonfunctie (PC6 en huisnummer, huisnummertoevoeging).
+#' De omzet-matrices zijn op gemeenteniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_toevoeging_gemeente_van_2016_naar_2023)
+#' 
+"grenswijziging_toevoeging_gemeente_van_2016_naar_2023"
+#' Matrix grenswijzigingen 2016-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren uit jaar 2016 naar jaar 2023 voor regio wijk
+#' De omzetting gebeurt naar rato van het aantal adressen (PC6 en huisnummer).
+#' Woonfunctie of toevoeging aan het huisnummer worden niet meegenomen.
+#' De omzet-matrices zijn op wijkniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_wijk_van_2016_naar_2023)
+#' 
+"grenswijziging_wijk_van_2016_naar_2023"
+#' Matrix grenswijzigingen 2016-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren uit jaar 2016 naar jaar 2023 voor regio wijk.
+#' De omzetting gebeurt naar rato van het aantal volledige adressen met
+#' woonfunctie (PC6 en huisnummer, huisnummertoevoeging).
+#' De omzet-matrices zijn op wijkniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_toevoeging_wijk_van_2016_naar_2023)
+#' 
+"grenswijziging_toevoeging_wijk_van_2016_naar_2023"
+#' Matrix grenswijzigingen 2017-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren uit jaar 2017 naar jaar 2023 voor regio gemeente
+#' De omzetting gebeurt naar rato van het aantal adressen (PC6 en huisnummer).
+#' Woonfunctie of toevoeging aan het huisnummer worden niet meegenomen.
+#' De omzet-matrices zijn op gemeenteniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_gemeente_van_2017_naar_2023)
+#' 
+"grenswijziging_gemeente_van_2017_naar_2023"
+#' Matrix grenswijzigingen 2017-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren uit jaar 2017 naar jaar 2023 voor regio gemeente.
+#' De omzetting gebeurt naar rato van het aantal volledige adressen met
+#' woonfunctie (PC6 en huisnummer, huisnummertoevoeging).
+#' De omzet-matrices zijn op gemeenteniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_toevoeging_gemeente_van_2017_naar_2023)
+#' 
+"grenswijziging_toevoeging_gemeente_van_2017_naar_2023"
+#' Matrix grenswijzigingen 2017-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren uit jaar 2017 naar jaar 2023 voor regio wijk
+#' De omzetting gebeurt naar rato van het aantal adressen (PC6 en huisnummer).
+#' Woonfunctie of toevoeging aan het huisnummer worden niet meegenomen.
+#' De omzet-matrices zijn op wijkniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_wijk_van_2017_naar_2023)
+#' 
+"grenswijziging_wijk_van_2017_naar_2023"
+#' Matrix grenswijzigingen 2017-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren uit jaar 2017 naar jaar 2023 voor regio wijk.
+#' De omzetting gebeurt naar rato van het aantal volledige adressen met
+#' woonfunctie (PC6 en huisnummer, huisnummertoevoeging).
+#' De omzet-matrices zijn op wijkniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_toevoeging_wijk_van_2017_naar_2023)
+#' 
+"grenswijziging_toevoeging_wijk_van_2017_naar_2023"
+#' Matrix grenswijzigingen 2018-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren uit jaar 2018 naar jaar 2023 voor regio gemeente
+#' De omzetting gebeurt naar rato van het aantal adressen (PC6 en huisnummer).
+#' Woonfunctie of toevoeging aan het huisnummer worden niet meegenomen.
+#' De omzet-matrices zijn op gemeenteniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_gemeente_van_2018_naar_2023)
+#' 
+"grenswijziging_gemeente_van_2018_naar_2023"
+#' Matrix grenswijzigingen 2018-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren uit jaar 2018 naar jaar 2023 voor regio gemeente.
+#' De omzetting gebeurt naar rato van het aantal volledige adressen met
+#' woonfunctie (PC6 en huisnummer, huisnummertoevoeging).
+#' De omzet-matrices zijn op gemeenteniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_toevoeging_gemeente_van_2018_naar_2023)
+#' 
+"grenswijziging_toevoeging_gemeente_van_2018_naar_2023"
+#' Matrix grenswijzigingen 2018-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren uit jaar 2018 naar jaar 2023 voor regio wijk
+#' De omzetting gebeurt naar rato van het aantal adressen (PC6 en huisnummer).
+#' Woonfunctie of toevoeging aan het huisnummer worden niet meegenomen.
+#' De omzet-matrices zijn op wijkniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_wijk_van_2018_naar_2023)
+#' 
+"grenswijziging_wijk_van_2018_naar_2023"
+#' Matrix grenswijzigingen 2018-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren uit jaar 2018 naar jaar 2023 voor regio wijk.
+#' De omzetting gebeurt naar rato van het aantal volledige adressen met
+#' woonfunctie (PC6 en huisnummer, huisnummertoevoeging).
+#' De omzet-matrices zijn op wijkniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_toevoeging_wijk_van_2018_naar_2023)
+#' 
+"grenswijziging_toevoeging_wijk_van_2018_naar_2023"
+#' Matrix grenswijzigingen 2019-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren uit jaar 2019 naar jaar 2023 voor regio gemeente
+#' De omzetting gebeurt naar rato van het aantal adressen (PC6 en huisnummer).
+#' Woonfunctie of toevoeging aan het huisnummer worden niet meegenomen.
+#' De omzet-matrices zijn op gemeenteniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_gemeente_van_2019_naar_2023)
+#' 
+"grenswijziging_gemeente_van_2019_naar_2023"
+#' Matrix grenswijzigingen 2019-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren uit jaar 2019 naar jaar 2023 voor regio gemeente.
+#' De omzetting gebeurt naar rato van het aantal volledige adressen met
+#' woonfunctie (PC6 en huisnummer, huisnummertoevoeging).
+#' De omzet-matrices zijn op gemeenteniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_toevoeging_gemeente_van_2019_naar_2023)
+#' 
+"grenswijziging_toevoeging_gemeente_van_2019_naar_2023"
+#' Matrix grenswijzigingen 2019-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren uit jaar 2019 naar jaar 2023 voor regio wijk
+#' De omzetting gebeurt naar rato van het aantal adressen (PC6 en huisnummer).
+#' Woonfunctie of toevoeging aan het huisnummer worden niet meegenomen.
+#' De omzet-matrices zijn op wijkniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_wijk_van_2019_naar_2023)
+#' 
+"grenswijziging_wijk_van_2019_naar_2023"
+#' Matrix grenswijzigingen 2019-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren uit jaar 2019 naar jaar 2023 voor regio wijk.
+#' De omzetting gebeurt naar rato van het aantal volledige adressen met
+#' woonfunctie (PC6 en huisnummer, huisnummertoevoeging).
+#' De omzet-matrices zijn op wijkniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_toevoeging_wijk_van_2019_naar_2023)
+#' 
+"grenswijziging_toevoeging_wijk_van_2019_naar_2023"
+#' Matrix grenswijzigingen 2020-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren uit jaar 2020 naar jaar 2023 voor regio gemeente
+#' De omzetting gebeurt naar rato van het aantal adressen (PC6 en huisnummer).
+#' Woonfunctie of toevoeging aan het huisnummer worden niet meegenomen.
+#' De omzet-matrices zijn op gemeenteniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_gemeente_van_2020_naar_2023)
+#' 
+"grenswijziging_gemeente_van_2020_naar_2023"
+#' Matrix grenswijzigingen 2020-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren uit jaar 2020 naar jaar 2023 voor regio gemeente.
+#' De omzetting gebeurt naar rato van het aantal volledige adressen met
+#' woonfunctie (PC6 en huisnummer, huisnummertoevoeging).
+#' De omzet-matrices zijn op gemeenteniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_toevoeging_gemeente_van_2020_naar_2023)
+#' 
+"grenswijziging_toevoeging_gemeente_van_2020_naar_2023"
+#' Matrix grenswijzigingen 2020-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren uit jaar 2020 naar jaar 2023 voor regio wijk
+#' De omzetting gebeurt naar rato van het aantal adressen (PC6 en huisnummer).
+#' Woonfunctie of toevoeging aan het huisnummer worden niet meegenomen.
+#' De omzet-matrices zijn op wijkniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_wijk_van_2020_naar_2023)
+#' 
+"grenswijziging_wijk_van_2020_naar_2023"
+#' Matrix grenswijzigingen 2020-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren uit jaar 2020 naar jaar 2023 voor regio wijk.
+#' De omzetting gebeurt naar rato van het aantal volledige adressen met
+#' woonfunctie (PC6 en huisnummer, huisnummertoevoeging).
+#' De omzet-matrices zijn op wijkniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_toevoeging_wijk_van_2020_naar_2023)
+#' 
+"grenswijziging_toevoeging_wijk_van_2020_naar_2023"
+#' Matrix grenswijzigingen 2021-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren uit jaar 2021 naar jaar 2023 voor regio gemeente
+#' De omzetting gebeurt naar rato van het aantal adressen (PC6 en huisnummer).
+#' Woonfunctie of toevoeging aan het huisnummer worden niet meegenomen.
+#' De omzet-matrices zijn op gemeenteniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_gemeente_van_2021_naar_2023)
+#' 
+"grenswijziging_gemeente_van_2021_naar_2023"
+#' Matrix grenswijzigingen 2021-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren uit jaar 2021 naar jaar 2023 voor regio gemeente.
+#' De omzetting gebeurt naar rato van het aantal volledige adressen met
+#' woonfunctie (PC6 en huisnummer, huisnummertoevoeging).
+#' De omzet-matrices zijn op gemeenteniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_toevoeging_gemeente_van_2021_naar_2023)
+#' 
+"grenswijziging_toevoeging_gemeente_van_2021_naar_2023"
+#' Matrix grenswijzigingen 2021-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren uit jaar 2021 naar jaar 2023 voor regio wijk
+#' De omzetting gebeurt naar rato van het aantal adressen (PC6 en huisnummer).
+#' Woonfunctie of toevoeging aan het huisnummer worden niet meegenomen.
+#' De omzet-matrices zijn op wijkniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_wijk_van_2021_naar_2023)
+#' 
+"grenswijziging_wijk_van_2021_naar_2023"
+#' Matrix grenswijzigingen 2021-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren uit jaar 2021 naar jaar 2023 voor regio wijk.
+#' De omzetting gebeurt naar rato van het aantal volledige adressen met
+#' woonfunctie (PC6 en huisnummer, huisnummertoevoeging).
+#' De omzet-matrices zijn op wijkniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_toevoeging_wijk_van_2021_naar_2023)
+#' 
+"grenswijziging_toevoeging_wijk_van_2021_naar_2023"
+#' Matrix grenswijzigingen 2022-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren uit jaar 2022 naar jaar 2023 voor regio gemeente
+#' De omzetting gebeurt naar rato van het aantal adressen (PC6 en huisnummer).
+#' Woonfunctie of toevoeging aan het huisnummer worden niet meegenomen.
+#' De omzet-matrices zijn op gemeenteniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_gemeente_van_2022_naar_2023)
+#' 
+"grenswijziging_gemeente_van_2022_naar_2023"
+#' Matrix grenswijzigingen 2022-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren uit jaar 2022 naar jaar 2023 voor regio gemeente.
+#' De omzetting gebeurt naar rato van het aantal volledige adressen met
+#' woonfunctie (PC6 en huisnummer, huisnummertoevoeging).
+#' De omzet-matrices zijn op gemeenteniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_toevoeging_gemeente_van_2022_naar_2023)
+#' 
+"grenswijziging_toevoeging_gemeente_van_2022_naar_2023"
+#' Matrix grenswijzigingen 2022-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren uit jaar 2022 naar jaar 2023 voor regio wijk
+#' De omzetting gebeurt naar rato van het aantal adressen (PC6 en huisnummer).
+#' Woonfunctie of toevoeging aan het huisnummer worden niet meegenomen.
+#' De omzet-matrices zijn op wijkniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_wijk_van_2022_naar_2023)
+#' 
+"grenswijziging_wijk_van_2022_naar_2023"
+#' Matrix grenswijzigingen 2022-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren uit jaar 2022 naar jaar 2023 voor regio wijk.
+#' De omzetting gebeurt naar rato van het aantal volledige adressen met
+#' woonfunctie (PC6 en huisnummer, huisnummertoevoeging).
+#' De omzet-matrices zijn op wijkniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_toevoeging_wijk_van_2022_naar_2023)
+#' 
+"grenswijziging_toevoeging_wijk_van_2022_naar_2023"
+#' Matrix omzetting postcode naar regio 2016-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren vanuit postcode uit jaar 2016 naar jaar 2023 voor regio gemeente
+#' De omzetting gebeurt naar rato van het aantal adressen (PC6 en huisnummer).
+#' Woonfunctie of toevoeging aan het huisnummer worden niet meegenomen.
+#' De omzet-matrices zijn op gemeenteniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_gemeente_van_2016_naar_2023_voor_postcode)
+#' 
+"grenswijziging_gemeente_van_2016_naar_2023_voor_postcode"
+#' Matrix omzetting postcode naar regio 2016-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren vanuit postcode uit jaar 2016 naar jaar 2023 voor regio wijk
+#' De omzetting gebeurt naar rato van het aantal adressen (PC6 en huisnummer).
+#' Woonfunctie of toevoeging aan het huisnummer worden niet meegenomen.
+#' De omzet-matrices zijn op wijkniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_wijk_van_2016_naar_2023_voor_postcode)
+#' 
+"grenswijziging_wijk_van_2016_naar_2023_voor_postcode"
+#' Matrix omzetting postcode naar regio 2017-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren vanuit postcode uit jaar 2017 naar jaar 2023 voor regio gemeente
+#' De omzetting gebeurt naar rato van het aantal adressen (PC6 en huisnummer).
+#' Woonfunctie of toevoeging aan het huisnummer worden niet meegenomen.
+#' De omzet-matrices zijn op gemeenteniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_gemeente_van_2017_naar_2023_voor_postcode)
+#' 
+"grenswijziging_gemeente_van_2017_naar_2023_voor_postcode"
+#' Matrix omzetting postcode naar regio 2017-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren vanuit postcode uit jaar 2017 naar jaar 2023 voor regio wijk
+#' De omzetting gebeurt naar rato van het aantal adressen (PC6 en huisnummer).
+#' Woonfunctie of toevoeging aan het huisnummer worden niet meegenomen.
+#' De omzet-matrices zijn op wijkniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_wijk_van_2017_naar_2023_voor_postcode)
+#' 
+"grenswijziging_wijk_van_2017_naar_2023_voor_postcode"
+#' Matrix omzetting postcode naar regio 2018-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren vanuit postcode uit jaar 2018 naar jaar 2023 voor regio gemeente
+#' De omzetting gebeurt naar rato van het aantal adressen (PC6 en huisnummer).
+#' Woonfunctie of toevoeging aan het huisnummer worden niet meegenomen.
+#' De omzet-matrices zijn op gemeenteniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_gemeente_van_2018_naar_2023_voor_postcode)
+#' 
+"grenswijziging_gemeente_van_2018_naar_2023_voor_postcode"
+#' Matrix omzetting postcode naar regio 2018-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren vanuit postcode uit jaar 2018 naar jaar 2023 voor regio wijk
+#' De omzetting gebeurt naar rato van het aantal adressen (PC6 en huisnummer).
+#' Woonfunctie of toevoeging aan het huisnummer worden niet meegenomen.
+#' De omzet-matrices zijn op wijkniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_wijk_van_2018_naar_2023_voor_postcode)
+#' 
+"grenswijziging_wijk_van_2018_naar_2023_voor_postcode"
+#' Matrix omzetting postcode naar regio 2019-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren vanuit postcode uit jaar 2019 naar jaar 2023 voor regio gemeente
+#' De omzetting gebeurt naar rato van het aantal adressen (PC6 en huisnummer).
+#' Woonfunctie of toevoeging aan het huisnummer worden niet meegenomen.
+#' De omzet-matrices zijn op gemeenteniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_gemeente_van_2019_naar_2023_voor_postcode)
+#' 
+"grenswijziging_gemeente_van_2019_naar_2023_voor_postcode"
+#' Matrix omzetting postcode naar regio 2019-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren vanuit postcode uit jaar 2019 naar jaar 2023 voor regio wijk
+#' De omzetting gebeurt naar rato van het aantal adressen (PC6 en huisnummer).
+#' Woonfunctie of toevoeging aan het huisnummer worden niet meegenomen.
+#' De omzet-matrices zijn op wijkniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_wijk_van_2019_naar_2023_voor_postcode)
+#' 
+"grenswijziging_wijk_van_2019_naar_2023_voor_postcode"
+#' Matrix omzetting postcode naar regio 2020-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren vanuit postcode uit jaar 2020 naar jaar 2023 voor regio gemeente
+#' De omzetting gebeurt naar rato van het aantal adressen (PC6 en huisnummer).
+#' Woonfunctie of toevoeging aan het huisnummer worden niet meegenomen.
+#' De omzet-matrices zijn op gemeenteniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_gemeente_van_2020_naar_2023_voor_postcode)
+#' 
+"grenswijziging_gemeente_van_2020_naar_2023_voor_postcode"
+#' Matrix omzetting postcode naar regio 2020-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren vanuit postcode uit jaar 2020 naar jaar 2023 voor regio wijk
+#' De omzetting gebeurt naar rato van het aantal adressen (PC6 en huisnummer).
+#' Woonfunctie of toevoeging aan het huisnummer worden niet meegenomen.
+#' De omzet-matrices zijn op wijkniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_wijk_van_2020_naar_2023_voor_postcode)
+#' 
+"grenswijziging_wijk_van_2020_naar_2023_voor_postcode"
+#' Matrix omzetting postcode naar regio 2021-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren vanuit postcode uit jaar 2021 naar jaar 2023 voor regio gemeente
+#' De omzetting gebeurt naar rato van het aantal adressen (PC6 en huisnummer).
+#' Woonfunctie of toevoeging aan het huisnummer worden niet meegenomen.
+#' De omzet-matrices zijn op gemeenteniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_gemeente_van_2021_naar_2023_voor_postcode)
+#' 
+"grenswijziging_gemeente_van_2021_naar_2023_voor_postcode"
+#' Matrix omzetting postcode naar regio 2021-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren vanuit postcode uit jaar 2021 naar jaar 2023 voor regio wijk
+#' De omzetting gebeurt naar rato van het aantal adressen (PC6 en huisnummer).
+#' Woonfunctie of toevoeging aan het huisnummer worden niet meegenomen.
+#' De omzet-matrices zijn op wijkniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_wijk_van_2021_naar_2023_voor_postcode)
+#' 
+"grenswijziging_wijk_van_2021_naar_2023_voor_postcode"
+#' Matrix omzetting postcode naar regio 2022-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren vanuit postcode uit jaar 2022 naar jaar 2023 voor regio gemeente
+#' De omzetting gebeurt naar rato van het aantal adressen (PC6 en huisnummer).
+#' Woonfunctie of toevoeging aan het huisnummer worden niet meegenomen.
+#' De omzet-matrices zijn op gemeenteniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_gemeente_van_2022_naar_2023_voor_postcode)
+#' 
+"grenswijziging_gemeente_van_2022_naar_2023_voor_postcode"
+#' Matrix omzetting postcode naar regio 2022-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren vanuit postcode uit jaar 2022 naar jaar 2023 voor regio wijk
+#' De omzetting gebeurt naar rato van het aantal adressen (PC6 en huisnummer).
+#' Woonfunctie of toevoeging aan het huisnummer worden niet meegenomen.
+#' De omzet-matrices zijn op wijkniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_wijk_van_2022_naar_2023_voor_postcode)
+#' 
+"grenswijziging_wijk_van_2022_naar_2023_voor_postcode"
+#' Matrix omzetting postcode naar regio 2023-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren vanuit postcode uit jaar 2023 naar jaar 2023 voor regio gemeente
+#' De omzetting gebeurt naar rato van het aantal adressen (PC6 en huisnummer).
+#' Woonfunctie of toevoeging aan het huisnummer worden niet meegenomen.
+#' De omzet-matrices zijn op gemeenteniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_gemeente_van_2023_naar_2023_voor_postcode)
+#' 
+"grenswijziging_gemeente_van_2023_naar_2023_voor_postcode"
+#' Matrix omzetting postcode naar regio 2023-2023
+#' 
+#' Een matrix voor het omzetten van indicatoren vanuit postcode uit jaar 2023 naar jaar 2023 voor regio wijk
+#' De omzetting gebeurt naar rato van het aantal adressen (PC6 en huisnummer).
+#' Woonfunctie of toevoeging aan het huisnummer worden niet meegenomen.
+#' De omzet-matrices zijn op wijkniveau.
+#' 
+#' @docType data
+#' 
+#' @usage data(grenswijziging_wijk_van_2023_naar_2023_voor_postcode)
+#' 
+"grenswijziging_wijk_van_2023_naar_2023_voor_postcode"

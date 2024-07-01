@@ -88,7 +88,7 @@ splits_matrix_in_blokken <- function(mat) {
   edges[,"j"] <- sprintf("old_%s", colnames(mat)[as.numeric(edges[, "j"])])
 
   # maak van de 'edges' een grafiek
-  g <- igraph::graph.edgelist(edges)
+  g <- igraph::graph_from_edgelist(edges)
 
   # vind de onverbonden groepen
   groups <- igraph::groups(igraph::components(g))
