@@ -1,6 +1,6 @@
 Package: grenswijzigen
 Title: Indicatoren Op Regionaal Niveau Corrigeren Voor Grenswijzigingen
-Version: 0.0.3
+Version: 0.0.4
 Authors@R: 
     person(given = "Hans",
            family = "Weda",
@@ -21,7 +21,7 @@ Imports:
 Depends: 
     R (>= 2.10)
 Suggests: 
-    dplyr,
     cbsodataR,
+    dplyr,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

@@ -1,3 +1,8 @@
+# Grenswijzigen 0.1.0
+
+* Verwijderen renv uit het project
+* Toevoegen van het jaar 2024
+
 # Grenswijzigen 0.0.3
 
 * Toevoegen van het jaar 2023
