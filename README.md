@@ -7,7 +7,8 @@
 
 <!-- badges: end -->
 
-Deze repository bevat de code voor grenswijzigingen.
+Deze repository bevat de code voor grenswijzigingen. Dit is een *fork*
+en update van <https://github.com/VNG-Realisatie/grenswijzigen>.
 
 ## Introductie
 
@@ -58,7 +59,8 @@ worden gemaakt van de wijkkenmerken van vorige jaren met de huidige
 wijkgrenzen. Deze repository bevat R-script waarmee dergelijke
 schattingen gemaakt kunnen worden.
 
-Zie deze link voor een dashboard die grenswijzigingen inzichtelijk maakt
+Zie deze link (voor het laatst bijgewerkt in 2022) voor een dashboard
+die grenswijzigingen inzichtelijk maakt
 <https://datamonitoringvng.shinyapps.io/grenswijzigingen/>
 
 ## Modellen voor grenswijzigen
@@ -117,7 +119,7 @@ als:
 
 ``` r
 # Install the development version from GitHub
-devtools::install_github("VNG-Realisatie/grenswijzigen") 
+devtools::install_github("reidhin/grenswijzigen") 
 ```
 
 ### Opzetten project
@@ -349,14 +351,6 @@ print(head(df.wijk %>% arrange(WijkenEnBuurten)))
 #> 6 "WK001405  "                3290
 ```
 
-## Contact
-
-Neem contact met ons op in geval van vragen of opmerkingen.
-
-Voor technische vragen, mail naar <hans.weda@vng.nl>
-
-Voor project-gerelateerde vragen, mail naar <janneke.lummen@vng.nl>
-
 ## Licentie
 
 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.nl"><img alt="Creative Commons-Licentie" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />Dit
@@ -373,7 +367,6 @@ Internationaal-licentie</a>.
     │   NAMESPACE
     │   README.md
     │   README.Rmd                      <- De top-level README voor ontwikkelaars die gebruik maken van het project.
-    │   renv.lock                       
     │
     ├───data                            <- Plek waar de omzetmatrices worden opgeslagen  
     │
