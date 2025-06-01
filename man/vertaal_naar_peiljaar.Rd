@@ -63,11 +63,11 @@ df <- rbind(
     jaar=2018
   )
 ) \%>\% mutate(
-  gwb_code=as.numeric(gsub("\\\\D", "", WijkenEnBuurten))
+  gwb_code=trimws(gsub("^WK", "", WijkenEnBuurten))
 ) \%>\% select(-WijkenEnBuurten)
 
-# laat de wijken in Wageningen zien (gwb_code begint met 289)
-print(filter(df, grepl("^289", as.character(gwb_code))))
+# laat de wijken in Wageningen zien (gwb_code begint met 0289)
+print(filter(df, grepl("^0289", gwb_code)))
 #
 #
 # Omzetten van de data van 2017 naar 2018
@@ -80,6 +80,6 @@ df_omgezet <- vertaal_naar_peiljaar(
 )
 
 # laat de omgezette wijken in Wageningen zien
-print(filter(df_omgezet, grepl("^289", as.character(gwb_code))))
+print(filter(df_omgezet, grepl("^0289", gwb_code)))
 
 }

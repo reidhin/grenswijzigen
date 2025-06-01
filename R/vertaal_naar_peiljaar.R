@@ -41,11 +41,11 @@
 #'     jaar=2018
 #'   )
 #' ) %>% mutate(
-#'   gwb_code=as.numeric(gsub("\\D", "", WijkenEnBuurten))
+#'   gwb_code=trimws(gsub("^WK", "", WijkenEnBuurten))
 #' ) %>% select(-WijkenEnBuurten)
 #'
-#' # laat de wijken in Wageningen zien (gwb_code begint met 289)
-#' print(filter(df, grepl("^289", as.character(gwb_code))))
+#' # laat de wijken in Wageningen zien (gwb_code begint met 0289)
+#' print(filter(df, grepl("^0289", gwb_code)))
 #' #
 #' #
 #' # Omzetten van de data van 2017 naar 2018
@@ -58,7 +58,7 @@
 #' )
 #'
 #' # laat de omgezette wijken in Wageningen zien
-#' print(filter(df_omgezet, grepl("^289", as.character(gwb_code))))
+#' print(filter(df_omgezet, grepl("^0289", gwb_code)))
 #'
 vertaal_naar_peiljaar <- function(
   df,
@@ -118,14 +118,14 @@ vertaal_naar_peiljaar <- function(
 
   # splits de df in wijken die omgezet moeten worden en wijken die zo kunnen
   # blijven
-  df_onveranderd <- df[!(df[,"gwb_code"] %in% as.numeric(colnames(mat))),]
-  df_omtezetten <- df[df[,"gwb_code"] %in% as.numeric(colnames(mat)),]
+  df_onveranderd <- df[!(df[,"gwb_code"] %in% colnames(mat)),]
+  df_omtezetten <- df[df[,"gwb_code"] %in% colnames(mat),]
 
   # zet de rijen van df_omtezetten in de goede volgorde
   df_omtezetten <- df_omtezetten[match(colnames(mat), df_omtezetten$gwb_code),]
 
   # bereid de omgezette data frame voor
-  df_omgezet <- data.frame(gwb_code=as.numeric(rownames(mat)))
+  df_omgezet <- data.frame(gwb_code=rownames(mat))
 
   if (dim(df_omtezetten)[1] != dim(mat)[2]){
     stop(
