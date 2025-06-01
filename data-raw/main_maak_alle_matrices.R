@@ -2,10 +2,11 @@
 Dit script is bedoeld om de benodigde omzetmatrices te maken vanuit de
 bronnen.
 
-Auteur: Hans Weda, rond consulting
+Auteur: Hans Weda
 Datum: 21 juni 2022
 Update: 5 januari 2023 - toevoegen jaar 2022
 Update: 1 juli 2024 - toevoegen jaar 2023
+Update: 31 mei 2025 - toevoegen jaar 2024
 "
 
 # libraries
@@ -23,8 +24,8 @@ source(file.path("data-raw", "maak_omzet_matrices.R"))
 cache <- TRUE
 
 # Van welke jaren moeten matrices gemaakt worden?
-van_jaren <- 2016:2022
-naar_jaren <- 2017:2023
+van_jaren <- 2016:2023
+naar_jaren <- 2017:2024
 
 # welke regionale niveaus?
 regionale_niveaus <- c("gemeente", "wijk")

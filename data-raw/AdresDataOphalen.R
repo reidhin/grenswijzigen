@@ -19,6 +19,7 @@ Datum: 8 april 2021
 "
 
 library(cbsodataR)
+library(jsonlite)
 
 
 source(file.path("data-raw", "config_grenswijzigingen.R"))
@@ -114,6 +115,13 @@ laad_adressen <- function(jaren=2016:2021) {
     }
     if ("GEM2017" %in% names(gemeentes)) {
       setnames(gemeentes, c("GEM2017", "GEMNAAM"), c("Gemcode", "Gemeentenaam"))
+    }
+    if (all(grepl("^Gemeente", names(gemeentes)))) {
+      setnames(
+        gemeentes,
+        names(gemeentes)[grep("^Gemeente", names(gemeentes))],
+        c("Gemcode", "Gemeentenaam")
+      )
     }
     if ("Gem" %in% names(pc6hnr)) {
       setnames(pc6hnr, "Gem", "Gemeente")

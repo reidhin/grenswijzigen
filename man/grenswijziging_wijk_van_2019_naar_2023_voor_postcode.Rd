@@ -5,7 +5,7 @@
 \alias{grenswijziging_wijk_van_2019_naar_2023_voor_postcode}
 \title{Matrix omzetting postcode naar regio 2019-2023}
 \format{
-An object of class \code{matrix} (inherits from \code{array}) with 3353 rows and 4066 columns.
+An object of class \code{matrix} (inherits from \code{array}) with 3345 rows and 4066 columns.
 }
 \usage{
 data(grenswijziging_wijk_van_2019_naar_2023_voor_postcode)
