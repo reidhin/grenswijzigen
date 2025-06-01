@@ -20,6 +20,8 @@ Datum: 8 april 2021
 
 library(cbsodataR)
 library(jsonlite)
+library(data.table)
+library(foreign)
 
 
 source(file.path("data-raw", "config_grenswijzigingen.R"))
@@ -136,6 +138,17 @@ laad_adressen <- function(jaren=2016:2021) {
 
     # merge
     pc6hnr <- merge(pc6hnr, gemeentes, by.x="Gemeente", by.y="Gemcode")
+
+    # make column classes uniform over all years -> turn into character if needed
+    if (class(pc6hnr$Gemeente) == "integer") {
+      pc6hnr[, Gemeente := sprintf("%04d", Gemeente)]
+    }
+    if (class(pc6hnr$Wijk) == "integer") {
+      pc6hnr[, Wijk := sprintf("%06d", Wijk)]
+    }
+    if (class(pc6hnr$Buurt) == "integer") {
+      pc6hnr[, Buurt := sprintf("%08d", Buurt)]
+    }
 
     # rbind
     dt <- rbind(dt, pc6hnr)

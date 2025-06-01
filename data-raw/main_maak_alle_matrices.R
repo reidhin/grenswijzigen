@@ -10,8 +10,6 @@ Update: 31 mei 2025 - toevoegen jaar 2024
 "
 
 # libraries
-library(data.table)
-library(foreign)
 library(usethis)
 
 # maak de environment leeg
