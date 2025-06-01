@@ -391,7 +391,8 @@ maak_omzet_matrices_voor_postcode <- function(
 
   print(
     sprintf(
-      "Bereken de matrix voor de omzetting van postcode naar wijkcode uit jaar %d naar jaar %d",
+      "Bereken de matrix voor de omzetting van postcode naar %scode uit jaar %d naar jaar %d",
+      regionaalniveau,
       van_jaar,
       naar_jaar
     )
