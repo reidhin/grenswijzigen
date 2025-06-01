@@ -2,7 +2,7 @@
 
 # data frame met URL's, paden en bestandsnamen
 adressen_CBS <- data.frame(
-  jaar=2016:2023,
+  jaar=2016:2024,
   url=c(
     "https://www.cbs.nl/-/media/_excel/2016/38/2016-cbs-pc6huisnr20160801_buurt.zip",
     "https://www.cbs.nl/-/media/_excel/2017/38/2017-cbs-pc6huisnr20170801_buurt.zip",
@@ -11,7 +11,8 @@ adressen_CBS <- data.frame(
     "https://www.cbs.nl/-/media/_excel/2020/39/2020-cbs-pc6huisnr20200801-buurt.zip",
     "https://www.cbs.nl/-/media/_excel/2021/36/2021-cbs-pc6huisnr20200801_buurt.zip",
     "https://www.cbs.nl/-/media/_excel/2022/37/2022-cbs-pc6huisnr20210801_buurt.zip",
-    "https://download.cbs.nl/maatwerk/2023-cbs-pc6huisnr20230801_buurt.zip"
+    "https://download.cbs.nl/postcode/2023-cbs-pc6huisnr20230801_buurt_20250225.zip",
+    "https://download.cbs.nl/postcode/2024-cbs-pc6huisnr20240801_buurt_20250218.zip"
   ),
   pc6hnr=c(
     "pc6hnr20160801_gwb.csv",
@@ -21,7 +22,8 @@ adressen_CBS <- data.frame(
     "pc6hnr20200801_gwb.csv",
     "pc6hnr20210801_gwb.csv",
     "pc6hnr20220801_gwb.csv",
-    "2023-cbs-pc6huisnr20230801_buurt/pc6hnr20230801_gwb.csv"
+    "2023-cbs-pc6huisnr20230801_buurt_20250225/pc6hnr20230801_gwb.csv",
+    "pc6hnr20240801_gwb.csv"
   ),
   path=c(
     "2016-cbs-pc6huisnr20160801_buurt",
@@ -31,7 +33,8 @@ adressen_CBS <- data.frame(
     "2020-cbs-pc6huisnr20200801-buurt",
     "2021-cbs-pc6huisnr20200801_buurt",
     "2022-cbs-pc6huisnr20220801_buurt",
-    "2023-cbs-pc6huisnr20230801_buurt"
+    "2023-cbs-pc6huisnr20230801_buurt",
+    "2024-cbs-pc6huisnr20240801_buurt"
   ),
   gemeente=c(
     "gemeentenaam2016.dbf",
@@ -41,7 +44,8 @@ adressen_CBS <- data.frame(
     "gem2020.csv",
     "gem2021.csv",
     "gem2022.csv",
-    "2023-cbs-pc6huisnr20230801_buurt/gemeenten_2023.csv"
+    "2023-cbs-pc6huisnr20230801_buurt_20250225/gemeenten_2023.csv",
+    "gem_2024.csv"
   )
 )
 

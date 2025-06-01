@@ -5,7 +5,7 @@
 \alias{grenswijziging_toevoeging_wijk_van_2016_naar_2021}
 \title{Matrix grenswijzigingen 2016-2021}
 \format{
-An object of class \code{matrix} (inherits from \code{array}) with 1320 rows and 1052 columns.
+An object of class \code{matrix} (inherits from \code{array}) with 1295 rows and 1027 columns.
 }
 \usage{
 data(grenswijziging_toevoeging_wijk_van_2016_naar_2021)

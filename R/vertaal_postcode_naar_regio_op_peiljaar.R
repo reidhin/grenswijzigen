@@ -128,7 +128,7 @@ vertaal_postcode_naar_regio_op_peiljaar <- function(
   df <- df[match(df$Postcode, colnames(mat)),]
 
   # bereid de omgezette data frame voor
-  df_omgezet <- data.frame(gwb_code=as.numeric(rownames(mat)))
+  df_omgezet <- data.frame(gwb_code=rownames(mat))
 
   if (dim(df)[1] != dim(mat)[2]){
     stop(

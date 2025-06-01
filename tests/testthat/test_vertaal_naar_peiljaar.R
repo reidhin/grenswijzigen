@@ -21,12 +21,12 @@ test_that("vertaal naar peiljaar", {
       jaar=2018
     )
   ) %>% mutate(
-    gwb_code=as.numeric(gsub("\\D", "", WijkenEnBuurten))
+    gwb_code=trimws(gsub("^WK", "", WijkenEnBuurten))
   ) %>% select(-WijkenEnBuurten)
 
-  # laat de wijken in Wageningen zien (gwb_code begint met 289)
+  # laat de wijken in Wageningen zien (gwb_code begint met 0289)
   expect_snapshot(
-    filter(df, grepl("^289", as.character(gwb_code)))
+    filter(df, grepl("^0289", gwb_code))
   )
 
   # Omzetten van de data van 2017 naar 2018
@@ -40,7 +40,7 @@ test_that("vertaal naar peiljaar", {
 
   # laat de omgezette wijken in Wageningen zien
   expect_snapshot(
-    filter(df_omgezet, grepl("^289", as.character(gwb_code)))
+    filter(df_omgezet, grepl("^0289", gwb_code))
   )
 
 })

@@ -42,11 +42,11 @@
 #'     jaar=2018
 #'   )
 #' ) %>% mutate(
-#'   gwb_code=as.numeric(gsub("\\D", "", WijkenEnBuurten))
+#'   gwb_code=trimws(gsub("^WK", "", WijkenEnBuurten))
 #' ) %>% select(-WijkenEnBuurten)
 #'
-#' # laat de wijken in Wageningen zien (gwb_code begint met 289)
-#' print(filter(df, grepl("^289", as.character(gwb_code))))
+#' # laat de wijken in Wageningen zien (gwb_code begint met 0289)
+#' print(filter(df, grepl("^0289", gwb_code)))
 #' #
 #' #
 #' # Omzetten van de data van 2017 naar 2018
@@ -58,7 +58,7 @@
 #' )
 #'
 #' # laat de omgezette wijken in Wageningen zien
-#' print(filter(df_omgezet, grepl("^289", as.character(gwb_code))))
+#' print(filter(df_omgezet, grepl("^0289", gwb_code)))
 #'
 vertaal_naar_peiljaar_limSolve <- function(
   df,
@@ -80,7 +80,9 @@ vertaal_naar_peiljaar_limSolve <- function(
   if (!("gwb_code" %in% names(df))) {
     stop(
       "Het is noodzakelijk dat het data-frame naast de indicatoren ook de kolom 'gwb_code' bevat. ",
-      "'gwb_code' bestaat uit een integer die de code van de wijk of gemeente aangeeft."
+      "'gwb_code' bestaat uit een string die de code van de wijk of gemeente aangeeft.",
+      "Voor `regionaalniveau` wijk moet deze string 6 characters bevatten met leading zeros;",
+      "voor `regionaalniveau` gemeente 4 characters bevatten met leading zeros.",
     )
   }
 
@@ -99,14 +101,14 @@ vertaal_naar_peiljaar_limSolve <- function(
   # splits de df in wijken die omgezet moeten worden en wijken die zo kunnen
   # blijven
   df_onveranderd <-
-    df[df[,"jaar"]==oorspronkelijk_jaar & !(df[,"gwb_code"] %in% as.numeric(colnames(mat))),]
+    df[df[,"jaar"]==oorspronkelijk_jaar & !(df[,"gwb_code"] %in% colnames(mat)),]
   df_omtezetten <- rbind(
-    df[df[,"jaar"]==oorspronkelijk_jaar & df[,"gwb_code"] %in% as.numeric(colnames(mat)),],
-    df[df[,"jaar"]==peiljaar & df[,"gwb_code"] %in% as.numeric(rownames(mat)),]
+    df[df[,"jaar"]==oorspronkelijk_jaar & df[,"gwb_code"] %in% colnames(mat),],
+    df[df[,"jaar"]==peiljaar & df[,"gwb_code"] %in% rownames(mat),]
   )
 
   # bereid de omgezette data frame voor
-  df_omgezet <- data.frame(gwb_code=as.numeric(rownames(mat)))
+  df_omgezet <- data.frame(gwb_code=rownames(mat))
 
   if (dim(df_omtezetten)[1] != sum(dim(mat))){
     stop(

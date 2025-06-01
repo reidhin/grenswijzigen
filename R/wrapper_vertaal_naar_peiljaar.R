@@ -148,7 +148,7 @@ wrapper_vertaal_naar_peiljaar <- function(
   }
 
   # vorm de gwb_code om voor een merge
-  df$gwb_code <- as.numeric(gsub("\\D", "", df$wijkcode))
+  df$gwb_code <- trimws(gsub("(^WK)|(^GM)", "", df$wijkcode))
 
   # welke jaren moeten worden omgezet?
   omtezetten_jaren <- setdiff(unique(df$jaar), peiljaar)

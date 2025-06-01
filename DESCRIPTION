@@ -1,11 +1,10 @@
 Package: grenswijzigen
 Title: Indicatoren Op Regionaal Niveau Corrigeren Voor Grenswijzigingen
-Version: 0.0.3
+Version: 0.1.0
 Authors@R: 
     person(given = "Hans",
            family = "Weda",
            role = c("aut", "cre"),
-           email = "hans.weda@vng.nl",
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: Deze repository bevat de code voor grenswijzigingen.
 License: CC BY-NC-SA 4.0
@@ -19,9 +18,9 @@ Imports:
     Matrix,
     utils
 Depends: 
-    R (>= 2.10)
+    R (>= 3.5)
 Suggests: 
-    dplyr,
     cbsodataR,
+    dplyr,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

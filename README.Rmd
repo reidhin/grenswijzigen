@@ -20,6 +20,7 @@ Grenswijzigingen
 <!-- badges: end -->
 
 Deze repository bevat de code voor grenswijzigingen.
+Dit is een *fork* en update van https://github.com/VNG-Realisatie/grenswijzigen.
 
 ## Introductie
 
@@ -39,7 +40,7 @@ In principe kan het CBS of de gemeente op basis van zogenaamde microdata exact u
 
 Indien er geen beschikking is over microdata, of als men niet met privacy gevoelige data wil of kan rekenen, kunnen er toch schattingen worden gemaakt van de wijkkenmerken van vorige jaren met de huidige wijkgrenzen. Deze repository bevat R-script waarmee dergelijke schattingen gemaakt kunnen worden.
 
-Zie deze link voor een dashboard die grenswijzigingen inzichtelijk maakt [https://datamonitoringvng.shinyapps.io/grenswijzigingen/](https://datamonitoringvng.shinyapps.io/grenswijzigingen/)
+Zie deze link (voor het laatst bijgewerkt in 2022) voor een dashboard die grenswijzigingen inzichtelijk maakt [https://datamonitoringvng.shinyapps.io/grenswijzigingen/](https://datamonitoringvng.shinyapps.io/grenswijzigingen/)
 
 ## Modellen voor grenswijzigen
 
@@ -60,15 +61,12 @@ Het pakket van 'grenswijzigingen' kan geïnstalleerd worden vanuit GitHub als:
 
 ``` r
 # Install the development version from GitHub
-devtools::install_github("VNG-Realisatie/grenswijzigen") 
+devtools::install_github("reidhin/grenswijzigen") 
 ```
 
 ### Opzetten project
 
 Indien gewenst kan de gehele code ook vanuit GitHub gecloned worden. 
-We gebruiken Renv voor het versiebeheer van de packages en de R-versie. 
-Om direct te kunnen beginnen installeer je alle relevante packages met het 
-commando `renv::restore()`.
 
 De hoofdfunctie voor het uitvoeren van de code is de functie 
 `wrapper_vertaal_naar_peiljaar` in het bestand grenswijzigingen.R. Indicatoren 
@@ -183,13 +181,6 @@ print(head(df.wijk %>% arrange(WijkenEnBuurten)))
 
 ```
 
-## Contact
-Neem contact met ons op in geval van vragen of opmerkingen.
-
-Voor technische vragen, mail naar hans.weda@vng.nl
-
-Voor project-gerelateerde vragen, mail naar janneke.lummen@vng.nl
-
 
 ## Licentie
 
@@ -204,7 +195,6 @@ Project Organization
     │   NAMESPACE
     │   README.md
     │   README.Rmd                      <- De top-level README voor ontwikkelaars die gebruik maken van het project.
-    │   renv.lock                       
     │
     ├───data                            <- Plek waar de omzetmatrices worden opgeslagen  
     │

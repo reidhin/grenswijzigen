@@ -1,3 +1,14 @@
+# Grenswijzigen 0.1.0
+
+* Verwijderen renv uit het project
+* Toevoegen van het jaar 2024
+* Aanpassen van de omzet-matrices: de rij- en kolomnamen zijn nu strings:
+  Voor gemeenten strings van lengte 4 met leading zeros,
+  voor wijken strings van lengte 6 met leading zeros.
+  Deze wijziging was nodig in verband met de nieuwe codering van wijken - hier
+  worden nu ook letters in gebruikt. Vermoedelijk in verband met het hoge aantal
+  wijken in sommige gemeenten.
+
 # Grenswijzigen 0.0.3
 
 * Toevoegen van het jaar 2023
