@@ -19,7 +19,7 @@ Imports:
     Matrix,
     utils
 Depends: 
-    R (>= 2.10)
+    R (>= 3.5)
 Suggests: 
     cbsodataR,
     dplyr,
