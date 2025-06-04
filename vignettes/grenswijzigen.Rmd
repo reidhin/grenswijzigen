@@ -1,0 +1,270 @@
+---
+title: "Grenswijzigen"
+output: rmarkdown::html_vignette
+author: "Hans Weda"
+description: >
+  Begin hier voor een uitleg rondom `grenswijzigen` en de situatie rondom 
+  wijken en gemeenten.
+vignette: >
+  %\VignetteIndexEntry{grenswijzigen}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.dim = c(8, 6),
+  out.width="100%"
+)
+```
+
+```{r setup}
+
+library(grenswijzigen)
+
+```
+
+# Introductie
+
+Het grondgebied van Nederland kan op diverse manieren worden opgedeeld. De opdeling waar het in deze repository over gaat is de opsplitsing in gemeenten, wijken en buurten. Daarbij geldt dat buurten optellen tot wijken en wijken optellen tot gemeenten.
+
+Deze indeling ligt niet vast. Het aantal gemeenten neemt de laatste jaren af door fusies. Een grotere gemeente kan taken die worden toegewezen aan gemeenten gemakkelijker oppakken. Het aantal wijken neemt geleidelijk aan toe. Een gemeente kan zelf bepalen hoe zij hun grondgebied willen opdelen in wijken en buurten. Wellicht doordat het aantal gemeenten af neemt, is er behoefte een gemeente op te delen in meer wijken. 
+
+Door deze ontwikkelingen wijzigen de grenzen van gemeenten en wijken regelmatig . Dat heeft consequenties als men de huidige wijkkenmerken wil vergelijken met het verleden. Immers, de huidige wijk bestond mogelijk nog niet in voorgaande jaren. Daarmee is het lastig om trends in de ontwikkelingen in wijkkenmerken scherp te ontwaren. Bij wijkkenmerken kan men bijvoorbeeld denken aan het aandeel 65-plussers, de gemiddelde huishoudgrootte of de gemiddelde huizenprijs in een wijk.
+
+Het package `Grenswijzigen` helpt om te gaan met deze problematiek.
+
+## Achtergrond
+
+Bij het CBS is veel data te vinden. Voor dit onderwerp zijn we geinteresseerd in cijfers rondom wijken en gemeenten.
+Binnen het CBS betreft het bijvoorbeeld onderstaande tabellen:
+
+```{r kerncijfers}
+
+library(cbsodataR)
+
+df.catalog <- cbsodataR::cbs_get_datasets(catalog="CBS")
+df.catalog <- df.catalog[
+  grepl("Kerncijfers wijken en buurten \\d{4}$", df.catalog$Title), 
+  c("Identifier", "Title")
+]
+df.catalog$Jaar <- as.numeric(
+  regmatches(df.catalog$Title, regexpr("\\d{4}", df.catalog$Title))
+)
+df.catalog
+
+```
+
+Laten we alle data ophalen van 2016 tot en met 2024:
+
+```{r get_data}
+
+library(dplyr)
+
+# find all relevant identifiers from 2016 onwards
+ids <- df.catalog$Identifier[df.catalog$Jaar >= 2016]
+
+# create empty data-frame to be filled
+df <- data.frame()
+
+# loop over all id's 
+for (id in ids) {
+  df <- rbind(
+    df,
+    # download data, filter on 'Gemeente' and select relevant columns
+    cbsodataR::cbs_get_data(
+      id=id,
+      select=c("WijkenEnBuurten", "AantalInwoners_5", "k_65JaarOfOuder_12"),
+      WijkenEnBuurten = has_substring("GM") | has_substring("WK")
+    ) %>%
+      cbs_add_label_columns() %>%
+      # add a 'Year' column to keep track of the year the data is from
+      mutate(
+        Year = as.numeric(
+          gsub("\\D", "", df.catalog[df.catalog["Identifier"]==id, "Title"])
+        )
+      )
+  )
+}
+
+head(df)
+
+```
+
+Het aantal gemeenten neemt de laatste jaren af:
+
+```{r aantal_gemeenten}
+
+# explore the number of municipalities
+library(ggplot2)
+
+ggplot2::ggplot(
+  data = df %>% filter(grepl("^GM", WijkenEnBuurten)),
+  mapping = ggplot2::aes(x=as.factor(Year))
+) +
+  ggplot2::geom_bar(fill="dodgerblue") +
+  ggplot2::theme_classic() +
+  ggplot2::labs(
+    title = "Aantal Nederlandse gemeenten per jaar",
+    y = "Aantal gemeenten",
+    x = "Jaren"
+  ) +
+    geom_text(
+    aes(y = after_stat(count + 2), label = after_stat(count)),
+    stat = "count",
+    vjust=2
+  )
+
+``` 
+
+
+Het aantal wijken neemt de laatste jaren toe:
+
+```{r aantal_wijken}
+
+ggplot2::ggplot(
+  data = df %>% filter(grepl("^WK", WijkenEnBuurten)),
+  mapping = ggplot2::aes(x=as.factor(Year))
+) +
+  ggplot2::geom_bar(fill="dodgerblue") +
+  ggplot2::theme_classic() +
+  ggplot2::labs(
+    title = "Aantal Nederlandse wijken per jaar",
+    y = "Aantal wijken",
+    x = "Jaren"
+  ) +
+    geom_text(
+    aes(y = after_stat(count + 2), label = after_stat(count)),
+    stat = "count",
+    vjust=2
+  )
+
+```
+
+
+Zie voorbeeld hieronder waarbij de gemeente Haaren van 2020 naar 2021 opgaat in de vier gemeenten Boxtel, Oisterwijk, Tilburg, en Vught.
+
+```{r sankey}
+library(grenswijzigen)
+library(networkD3)
+
+mat <-grenswijziging_toevoeging_gemeente_van_2020_naar_2021
+df.links <- data.frame(
+  value=as.vector(mat), 
+  target=rep(0:(nrow(mat)-1), ncol(mat)), 
+  source=rep(nrow(mat):(nrow(mat)+ncol(mat)-1), each=nrow(mat))
+)
+df.nodes <- merge(
+  data.frame(
+    name=c(rownames(mat), colnames(mat)),
+    Year=c(rep(2021, nrow(mat)), rep(2020, ncol(mat)))
+  ),
+  df %>% mutate(name=trimws(gsub("(^GM)", "", WijkenEnBuurten))),
+  sort=FALSE
+)
+df.links <- df.links[df.links$value > 0, ]
+
+sankeyNetwork(
+  Links = df.links, 
+  Nodes = df.nodes, 
+  Source = 'source',
+  Target = 'target', 
+  Value = 'value', 
+  NodeID = 'WijkenEnBuurten_label',
+  fontSize = 12
+)
+```
+
+
+Als een gevolg hiervan zijn plotselinge sprongen te zien in de demografische gegevens, zoals weergegeven in de grafiek hieronder. Het aantal inwoners in Vught lijkt plotseling te vermeerderen met circa 5000 vanwege de gedeeltelijke overname van de verdwenen gemeente Haaren. Ook voor nieuw gevormde gemeenten zoals Eemsdelta zijn geen historische gegevens beschikbaar. Het is duidelijk dat dergelijke interrupties het moeilijk maken om data over de jaren heen met elkaar te vergelijken.
+
+
+
+```{r uncorrected_population}
+
+# show population of selected municipalities
+selected_municipalities = c("Vught", "Eemsdelta", "Wageningen", "Montferland", "Gorinchem")
+
+ggplot2::ggplot(
+  data = df %>%
+    filter(WijkenEnBuurten_label %in% selected_municipalities),
+  mapping = ggplot2::aes(
+    x=Year, 
+    y=AantalInwoners_5, 
+    color=WijkenEnBuurten_label
+  )
+) + 
+  ggplot2::geom_line(size=1.5) +
+  ggplot2::labs(
+    title = "Inwoners per jaar",
+    y = "Inwoneraantal",
+    color = "Gemeente"
+  ) +
+  ggplot2::theme_bw() 
+
+```
+
+## Correcties
+
+
+Het CBS rapporteert de wijzigingen in gemeentegrenzen en hoe wijkkenmerken over de jaren heen vergeleken kunnen worden. Voor de wijkgrenzen is er geen jaarlijkse publicatie over hoe wijkkenmerken over de jaren heen vergeleken kunnen worden. Het CBS geeft enkel aan of de cijfers vergeleken mogen worden met het jaar daarvoor. Als de cijfers niet vergelijkbaar zijn met het vorige jaar wordt niet aangegeven hoe deze getransformeerd moeten worden.
+
+In principe kan het CBS of de gemeente op basis van zogenaamde microdata exact uitrekenen wat de wijkkenmerken van vorige jaren zijn voor de huidige wijkgrenzen. Deze microdata bestaat uit kenmerken op persoons- of huishoudensniveau. Voor het rekenen met microdata moeten de privacy regels goed gewaarborgd worden.
+
+Indien er geen beschikking is over microdata, of als men niet met privacy gevoelige data wil of kan rekenen, kunnen er toch schattingen worden gemaakt van de wijkkenmerken van vorige jaren met de huidige wijkgrenzen. Deze repository bevat R-script waarmee dergelijke schattingen gemaakt kunnen worden.
+
+Zie deze link (voor het laatst bijgewerkt in 2022) voor een dashboard die grenswijzigingen inzichtelijk maakt [https://datamonitoringvng.shinyapps.io/grenswijzigingen/](https://datamonitoringvng.shinyapps.io/grenswijzigingen/)
+
+```{r grenswijzigen}
+
+# Transform the historic data to 2024
+df_transformed <- wrapper_vertaal_naar_peiljaar(
+  
+  # the package requires 'wijkcode' and 'jaar' as column names
+  as.data.frame(
+    df %>% rename(
+      wijkcode = WijkenEnBuurten,
+      gemeentenaam = WijkenEnBuurten_label,
+      jaar = Year
+    ) %>%
+      filter(grepl("^GM", wijkcode)) %>%
+      mutate(wijkcode=trimws(wijkcode))
+  ),
+  peiljaar = 2024,
+  model="model.2",
+  regionaalniveau = "gemeente",
+  kolommen_aantal = c("AantalInwoners_5", "k_65JaarOfOuder_12")
+) 
+
+# show that we have equal numbers of municipalities each year
+print(table(df_transformed$jaar))
+
+```
+
+```{r corrected_population}
+
+# show how the transformed data looks like
+ggplot2::ggplot(
+  data = df_transformed %>%
+    filter(gemeentenaam %in% selected_municipalities),
+  mapping = ggplot2::aes(
+    x=jaar, 
+    y=AantalInwoners_5, 
+    color=gemeentenaam,
+    linetype=berekend
+  )
+) + 
+  ggplot2::geom_line(size=1.5, linetype="dotted") +
+  ggplot2::geom_line(size=1.5) +
+  ggplot2::labs(
+    title = "Inwoners per jaar",
+    y = "Inwoneraantal",
+    color = "Gemeente",
+    linetype = "Oorsprong gegevens"
+  ) + 
+  ggplot2::scale_linetype_manual(values=c("solid", "dotted"), labels=c("Daadwerkelijk", "Geschat")) +
+  ggplot2::theme_bw()
+
+``` 

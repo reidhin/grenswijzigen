@@ -32,3 +32,4 @@ reports/figures/
 
 # ignore packages
 ./renv/library/
+inst/doc

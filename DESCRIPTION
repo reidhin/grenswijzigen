@@ -4,8 +4,9 @@ Version: 0.1.0
 Authors@R: 
     person(given = "Hans",
            family = "Weda",
+           email = "hans.weda@vng.nl",
            role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+           comment = c(ORCID = "0000-0001-6675-2270"))
 Description: Deze repository bevat de code voor grenswijzigingen.
 License: CC BY-NC-SA 4.0
 Encoding: UTF-8
@@ -22,5 +23,8 @@ Depends:
 Suggests: 
     cbsodataR,
     dplyr,
+    knitr,
+    rmarkdown,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+VignetteBuilder: knitr
