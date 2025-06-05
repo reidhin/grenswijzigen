@@ -38,7 +38,7 @@ Het package `Grenswijzigen` helpt om te gaan met deze problematiek.
 
 ## Achtergrond
 
-Bij het CBS is veel data te vinden. Voor dit onderwerp zijn we geinteresseerd in cijfers rondom wijken en gemeenten.
+Bij het CBS is veel data te vinden. Voor dit onderwerp zijn we met name geinteresseerd in cijfers rondom wijken en gemeenten.
 Binnen het CBS betreft het bijvoorbeeld onderstaande tabellen:
 
 ```{r kerncijfers}
@@ -57,7 +57,7 @@ df.catalog
 
 ```
 
-Laten we alle data ophalen van 2016 tot en met 2024:
+Het package `Grenswijzigen` is te gebruiken voor de jaren 2016 en later. Laten we daarom alle data ophalen van 2016 tot en met 2024:
 
 ```{r get_data}
 
@@ -93,7 +93,7 @@ head(df)
 
 ```
 
-Het aantal gemeenten neemt de laatste jaren af:
+Op basis van de opgehaalde data is het vrij eenvoudig inzichtelijk te maken hoe het aantal gemeenten afneemt in de laatste jaren:
 
 ```{r aantal_gemeenten}
 
@@ -119,8 +119,7 @@ ggplot2::ggplot(
 
 ``` 
 
-
-Het aantal wijken neemt de laatste jaren toe:
+En, zoals al eerder opgemerkt, neemt het aantal wijken de laatste jaren toe. Dit heeft vermoedelijk te maken met de behoefte om binnen grotere gemeenten toch zinvolle gebiedsopdelingen te kunnen blijven maken.
 
 ```{r aantal_wijken}
 
@@ -143,8 +142,8 @@ ggplot2::ggplot(
 
 ```
 
-
-Zie voorbeeld hieronder waarbij de gemeente Haaren van 2020 naar 2021 opgaat in de vier gemeenten Boxtel, Oisterwijk, Tilburg, en Vught.
+Als voorbeeld is hieronder de verandering in gemeenten voor de jaren 2020 naar 2021 weergegeven. Het totaal aantal gemeenten neemt af van 355 in het jaar 2020 naar 352 in het jaar 2021. De drie noordelijke gemeenten Appingedam, Loppersum en Delfzijl gaan op in een nieuwe gemeente met de naam Eemsdelta. De gemeente Haaren verdwijnt van 2020 naar 2021 in zijn geheel en gaat op in de vier gemeenten Boxtel, Oisterwijk, Tilburg, en Vught. 
+In het Sankey diagram hieronder is grafisch weergegeven hoe de adressen verschuiven tussen de gemeenten van 2020 naar 2021. Naast de bovengenoemde gemeenten gaat er een enkel adres van de gemeente Noordenveld naar de buurgemeente Westerveld, vermoedelijk vanwege een grenscorrectie.
 
 ```{r sankey}
 library(grenswijzigen)
@@ -178,7 +177,7 @@ sankeyNetwork(
 ```
 
 
-Als een gevolg hiervan zijn plotselinge sprongen te zien in de demografische gegevens, zoals weergegeven in de grafiek hieronder. Het aantal inwoners in Vught lijkt plotseling te vermeerderen met circa 5000 vanwege de gedeeltelijke overname van de verdwenen gemeente Haaren. Ook voor nieuw gevormde gemeenten zoals Eemsdelta zijn geen historische gegevens beschikbaar. Het is duidelijk dat dergelijke interrupties het moeilijk maken om data over de jaren heen met elkaar te vergelijken.
+Als een gevolg van deze gemeentelijke herindelingen zijn plotselinge sprongen te zien in de demografische gegevens, zoals weergegeven in de grafiek hieronder. Het aantal inwoners in Vught lijkt plotseling te vermeerderen met circa 5000 vanwege de gedeeltelijke overname van de verdwenen gemeente Haaren. Ook voor nieuw gevormde gemeenten zoals Eemsdelta zijn geen historische gegevens beschikbaar. Het is duidelijk dat dergelijke interrupties het moeilijk maken om data over de jaren heen met elkaar te vergelijken. Trends in mogelijk demografische ontwikkelingen zijn moeilijk te ontwaren.
 
 
 
@@ -209,13 +208,15 @@ ggplot2::ggplot(
 ## Correcties
 
 
-Het CBS rapporteert de wijzigingen in gemeentegrenzen en hoe wijkkenmerken over de jaren heen vergeleken kunnen worden. Voor de wijkgrenzen is er geen jaarlijkse publicatie over hoe wijkkenmerken over de jaren heen vergeleken kunnen worden. Het CBS geeft enkel aan of de cijfers vergeleken mogen worden met het jaar daarvoor. Als de cijfers niet vergelijkbaar zijn met het vorige jaar wordt niet aangegeven hoe deze getransformeerd moeten worden.
+Het CBS rapporteert de wijzigingen in gemeentegrenzen en hoe gemeentekenmerken over de jaren heen vergeleken kunnen worden. Voor de wijkgrenzen is er geen jaarlijkse publicatie over hoe wijkkenmerken over de jaren heen vergeleken kunnen worden. Het CBS geeft enkel aan of de cijfers vergeleken mogen worden met het jaar daarvoor. Als de cijfers niet vergelijkbaar zijn met het vorige jaar wordt niet aangegeven hoe deze getransformeerd moeten worden.
 
 In principe kan het CBS of de gemeente op basis van zogenaamde microdata exact uitrekenen wat de wijkkenmerken van vorige jaren zijn voor de huidige wijkgrenzen. Deze microdata bestaat uit kenmerken op persoons- of huishoudensniveau. Voor het rekenen met microdata moeten de privacy regels goed gewaarborgd worden.
 
-Indien er geen beschikking is over microdata, of als men niet met privacy gevoelige data wil of kan rekenen, kunnen er toch schattingen worden gemaakt van de wijkkenmerken van vorige jaren met de huidige wijkgrenzen. Deze repository bevat R-script waarmee dergelijke schattingen gemaakt kunnen worden.
+Indien er geen beschikking is over microdata, of als men niet met privacy gevoelige data wil of kan rekenen, kunnen er toch schattingen worden gemaakt van de wijkkenmerken van vorige jaren met de huidige wijkgrenzen. Deze repository bevat R-scripts waarmee dergelijke schattingen gemaakt kunnen worden.
 
 Zie deze link (voor het laatst bijgewerkt in 2022) voor een dashboard die grenswijzigingen inzichtelijk maakt [https://datamonitoringvng.shinyapps.io/grenswijzigingen/](https://datamonitoringvng.shinyapps.io/grenswijzigingen/)
+
+De code hieronder geeft aan hoe de data uit verschillende jaren met verschillende gemeentelijke indelingen omgezet kan worden naar een bepaald peiljaar. Hieronder is voor het peiljaar 2024 gekozen. Er moet worden aangegeven welk model wordt gekozen voor de omzetting. In dit geval is voor `model.2` gekozen. Ook het regionale niveau en of de variabelen als aantallen of percentages moeten worden behandeld kan worden aangegeven.
 
 ```{r grenswijzigen}
 
@@ -243,6 +244,8 @@ print(table(df_transformed$jaar))
 
 ```
 
+De omzetting van de dat leidt tot een dataset die over de jaren 2016 tot en met 2024 met elkaar vergeleken kan worden. Voor de jaren waarbij de gemeente nog niet bestond in de huidige vorm, worden de getallen ingeschat volgens `model.2` zoals in de code hierboven gerealiseerd wordt. Dit alles leidt tot de grafiek hieronder. Het is duidelijk dat demografische trends nu beter waarneembaar zijn.
+
 ```{r corrected_population}
 
 # show how the transformed data looks like
@@ -268,3 +271,17 @@ ggplot2::ggplot(
   ggplot2::theme_bw()
 
 ``` 
+
+## Modellen voor grenswijzigen
+
+Alle modellen zijn gebaseerd op het volgen van adressen door de tijd heen. Hierdoor kan worden achterhaalt bij welke wijk een adres hoort op in elk jaar. Vervolgens zijn er verschillende manieren om deze informatie te benutten. In deze repository zijn er drie modellen geïmplementeerd voor het uitvoeren van grenswijzigingen. 
+
+* Model.0 gaat uit van een uniforme verdeling van wijkkenmerken over de wijk heen. Dat wil zeggen dat wordt aangenomen dat kenmerken, bijvoorbeeld het aantal 65-plussers, gelijkelijk verdeeld zijn over de wijk. Bij het delen van de wijk in kleinere stukken kunnen deze kenmerken dan evenredig met het aantal adressen in deze stukken worden toegekend. In Model.0 zijn adressen gedefinieerd als postcode + huisnummer. Huisnummertoevoegingen en gebruiksfunctie van adressen worden niet meegenomen. Model.0 is daarmee een heel toegankelijk model dat een redelijk goede grenswijziging uitvoerd, maar dat faalt in geval van wijken met veel huisnummertoevoegingen (bijvoorbeeld hoogbouw of flats) en wijken met veel adressen zonder woonfunctie (bijvoorbeeld winkels, scholen en fabrieken).
+
+* Model.1 werkt gelijk aan Model.0 maar neemt daarentegen wel de huisnummertoevoeging en gebruiksfunctie van het adres mee. In Model.1 worden alleen adressen met een woonfunctie beschouwt. Daarmee presteert Model.1 aanzienlijk beter dan Model.0 voor wijken met veel huisnummertoevoegingen en andere gebruiksfuncties dan wonen. Model.1 gaat echter nog wel altijd uit van een uniforme verdeling van de wijkkenmerken over de wijk heen. Daarnaast wordt er een VNG api gebruikt om de huisnummertoevoegingen en gebruiksfunctie te achterhalen Dat kost het tamelijk veel tijd om uit te voeren voor alle adressen in Nederland. Daarom zijn ook vooraf berekende omzetmatrices beschikbaar gesteld in deze repository.
+
+* Model.2 neemt een andere benadering. Hier worden adressen opgedeeld in blokken gedefinieerd door de overlappingen tussen wijken in het ene jaar en de wijken in het volgende jaar. Voor elk blok wordt een variabele gedefinieerd die het gemiddelde van een wijkkenmerk in dat blok weergeeft. Voor deze variabelen wordt een stelsel formules opgesteld zodat de sommen van de adressen maal de gemiddelden gelijk zijn aan de wijkkenmerken zoals gepubliceerd door het CBS. Daarnaast wordt aangenomen dat deze gemiddelden van jaar tot jaar nauwelijks wijzigen. Dat lijkt een redelijke aanname: bijvoorbeeld het gemiddelde aantal 65-plussers per adres zal van jaar tot jaar ongeveer gelijk zijn. Dit stelsel vergelijkingen wordt opgelost wat tot grensgewijzigde data leidt. In dit model wordt eveneens uitgegaan van adressen met huisnummertoevoegingen en woonfunctie.
+
+## Beperkingen
+
+In de gebruikte benadering wordt aangenomen dat de demografische kenmerken van jaar op jaar op een groepje adressen relatief constant is. Op het moment dat een wijk of gemeente onder sterke ontwikkeling onderhevig is, zal deze benadering minder goed werken. Daarbij kan gedacht worden aan grootschalige nieuwbouw of herbestemming van bestaande panden.
