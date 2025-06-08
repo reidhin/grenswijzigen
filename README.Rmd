@@ -181,6 +181,9 @@ print(head(df.wijk %>% arrange(WijkenEnBuurten)))
 
 ```
 
+## Bekende fouten
+
+- Het adres met postcode 8754HA en huisnummer 23 lijkt in 2021 ten onrechte aan de gemeente Harderwijk te zijn toegewezen in de bronbestanden van het CBS.
 
 ## Licentie
 
