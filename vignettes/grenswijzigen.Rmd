@@ -6,7 +6,7 @@ description: >
   Begin hier voor een uitleg rondom `grenswijzigen` en de situatie rondom 
   wijken en gemeenten.
 vignette: >
-  %\VignetteIndexEntry{grenswijzigen}
+  %\VignetteIndexEntry{Grenswijzigen}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -36,7 +36,7 @@ Door deze ontwikkelingen wijzigen de grenzen van gemeenten en wijken regelmatig 
 
 Het package `Grenswijzigen` helpt om te gaan met deze problematiek.
 
-## Achtergrond
+# Achtergrond
 
 Bij het CBS is veel data te vinden. Voor dit onderwerp zijn we met name geinteresseerd in cijfers rondom wijken en gemeenten.
 Binnen het CBS betreft het bijvoorbeeld onderstaande tabellen:
@@ -142,6 +142,70 @@ ggplot2::ggplot(
 
 ```
 
+Als een gevolg van deze gemeentelijke herindelingen zijn plotselinge sprongen te zien in de demografische gegevens, zoals weergegeven in de grafiek hieronder. Het aantal inwoners in Vught lijkt plotseling te vermeerderen met circa 5000 vanwege de gedeeltelijke overname van de verdwenen gemeente Haaren. Ook voor nieuw gevormde gemeenten zoals Eemsdelta zijn geen historische gegevens beschikbaar. Het is duidelijk dat dergelijke interrupties het moeilijk maken om data over de jaren heen met elkaar te vergelijken. Trends in mogelijk demografische ontwikkelingen zijn moeilijk te ontwaren.
+
+
+
+```{r uncorrected_population}
+
+# show population of selected municipalities
+selected_municipalities = c("Vught", "Eemsdelta", "Wageningen", "Montferland", "Gorinchem")
+
+ggplot2::ggplot(
+  data = df %>%
+    filter(WijkenEnBuurten_label %in% selected_municipalities),
+  mapping = ggplot2::aes(
+    x=Year, 
+    y=AantalInwoners_5, 
+    color=WijkenEnBuurten_label
+  )
+) + 
+  ggplot2::geom_line(size=1.5) +
+  ggplot2::labs(
+    title = "Inwoners per jaar",
+    y = "Inwoneraantal",
+    color = "Gemeente"
+  ) +
+  ggplot2::theme_bw() 
+
+```
+
+# Oplossing
+
+## Installatie
+
+Het pakket van `grenswijzigingen` kan geïnstalleerd worden vanuit GitHub als:
+
+``` r
+# Install the development version from GitHub
+devtools::install_github("reidhin/grenswijzigen") 
+```
+
+Indien the pakket `grenswijzigingen` samen met de vignettes moet worden geïnstalleerd vanuit Github dan kan het volgende commando gebruikt worden:
+
+``` r
+# Install the development version from GitHub, explicitly requesting vignettes
+devtools::install_github(
+  "reidhin/grenswijzigen", 
+  dependencies = TRUE, 
+  build_vignettes = TRUE
+)
+```
+
+Indien gewenst kan de gehele code ook vanuit GitHub gecloned worden. 
+
+De hoofdfunctie voor het uitvoeren van de code is de functie 
+`wrapper_vertaal_naar_peiljaar` in het bestand grenswijzigingen.R. Indicatoren 
+die bestaan uit aantallen (bijvoorbeeld aantal inwoners in de wijk of aantal 
+65-plussers in de wijk) worden intern op een andere manier behandeld dan 
+indicatoren die bestaan uit percentages of aandelen (bijvoorbeeld gemiddelde 
+huishoudgrootte of aandeel arbeidsongeschikten per wijk). De functie 
+`wrapper_vertaal_naar_peiljaar` probeert op basis van kolomnamen zelf in te 
+schatten of het om aantallen of aandelen gaat. 
+
+
+## Visualisatie wijzigingen
+
 Als voorbeeld is hieronder de verandering in gemeenten voor de jaren 2020 naar 2021 weergegeven. Het totaal aantal gemeenten neemt af van 355 in het jaar 2020 naar 352 in het jaar 2021. De drie noordelijke gemeenten Appingedam, Loppersum en Delfzijl gaan op in een nieuwe gemeente met de naam Eemsdelta. De gemeente Haaren verdwijnt van 2020 naar 2021 in zijn geheel en gaat op in de vier gemeenten Boxtel, Oisterwijk, Tilburg, en Vught. 
 In het Sankey diagram hieronder is grafisch weergegeven hoe de adressen verschuiven tussen de gemeenten van 2020 naar 2021. Naast de bovengenoemde gemeenten gaat er een enkel adres van de gemeente Noordenveld naar de buurgemeente Westerveld, vermoedelijk vanwege een grenscorrectie.
 
@@ -177,35 +241,9 @@ sankeyNetwork(
 ```
 
 
-Als een gevolg van deze gemeentelijke herindelingen zijn plotselinge sprongen te zien in de demografische gegevens, zoals weergegeven in de grafiek hieronder. Het aantal inwoners in Vught lijkt plotseling te vermeerderen met circa 5000 vanwege de gedeeltelijke overname van de verdwenen gemeente Haaren. Ook voor nieuw gevormde gemeenten zoals Eemsdelta zijn geen historische gegevens beschikbaar. Het is duidelijk dat dergelijke interrupties het moeilijk maken om data over de jaren heen met elkaar te vergelijken. Trends in mogelijk demografische ontwikkelingen zijn moeilijk te ontwaren.
 
 
-
-```{r uncorrected_population}
-
-# show population of selected municipalities
-selected_municipalities = c("Vught", "Eemsdelta", "Wageningen", "Montferland", "Gorinchem")
-
-ggplot2::ggplot(
-  data = df %>%
-    filter(WijkenEnBuurten_label %in% selected_municipalities),
-  mapping = ggplot2::aes(
-    x=Year, 
-    y=AantalInwoners_5, 
-    color=WijkenEnBuurten_label
-  )
-) + 
-  ggplot2::geom_line(size=1.5) +
-  ggplot2::labs(
-    title = "Inwoners per jaar",
-    y = "Inwoneraantal",
-    color = "Gemeente"
-  ) +
-  ggplot2::theme_bw() 
-
-```
-
-## Correcties
+## Toepassen grenscorrecties
 
 
 Het CBS rapporteert de wijzigingen in gemeentegrenzen en hoe gemeentekenmerken over de jaren heen vergeleken kunnen worden. Voor de wijkgrenzen is er geen jaarlijkse publicatie over hoe wijkkenmerken over de jaren heen vergeleken kunnen worden. Het CBS geeft enkel aan of de cijfers vergeleken mogen worden met het jaar daarvoor. Als de cijfers niet vergelijkbaar zijn met het vorige jaar wordt niet aangegeven hoe deze getransformeerd moeten worden.
