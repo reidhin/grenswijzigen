@@ -1,6 +1,6 @@
 Package: grenswijzigen
 Title: Indicatoren Op Regionaal Niveau Corrigeren Voor Grenswijzigingen
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: 
     person(given = "Hans",
            family = "Weda",
@@ -30,3 +30,4 @@ Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 VignetteBuilder: knitr
+URL: https://reidhin.github.io/grenswijzigen/
