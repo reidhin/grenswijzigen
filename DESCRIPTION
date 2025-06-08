@@ -23,7 +23,9 @@ Depends:
 Suggests: 
     cbsodataR,
     dplyr,
+    ggplot2,
     knitr,
+    networkD3,
     rmarkdown,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
