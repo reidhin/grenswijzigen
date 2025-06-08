@@ -1,3 +1,8 @@
+# Grenswijzigen 0.1.1
+
+* Toevoegen Vignette
+* Toevoegen website
+
 # Grenswijzigen 0.1.0
 
 * Verwijderen renv uit het project

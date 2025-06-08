@@ -1,6 +1,6 @@
 Package: grenswijzigen
 Title: Indicatoren Op Regionaal Niveau Corrigeren Voor Grenswijzigingen
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: 
     person(given = "Hans",
            family = "Weda",
@@ -15,7 +15,7 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Imports: 
     igraph,
-    limSolve,
+    limSolve (>= 1.5.7.2),
     Matrix,
     utils
 Depends: 
@@ -30,3 +30,6 @@ Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 VignetteBuilder: knitr
+URL: https://reidhin.github.io/grenswijzigen/
+Remotes:  
+    git::https://github.com/cran/limSolve.git@master
