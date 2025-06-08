@@ -15,7 +15,7 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Imports: 
     igraph,
-    limSolve,
+    limSolve (>= 1.5.7.2),
     Matrix,
     utils
 Depends: 
@@ -31,3 +31,5 @@ Suggests:
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 URL: https://reidhin.github.io/grenswijzigen/
+Remotes:  
+    git::https://github.com/cran/limSolve.git@master
