@@ -1,3 +1,7 @@
+# Grenswijzigen 0.1.2
+
+* Update Vignette
+
 # Grenswijzigen 0.1.1
 
 * Toevoegen Vignette
