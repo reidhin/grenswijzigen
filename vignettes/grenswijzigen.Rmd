@@ -241,6 +241,43 @@ sankeyNetwork(
 ```
 
 
+Als tweede voorbeeld is hieronder de verandering in de Wageningse wijken van 2017 naar 2018 weergegeven. 
+In 2017 heeft Wageningen slechts twee wijken: *Stedelijk gebied* en *Landelijk gebied*. In 2018 heeft Wageningen de wijkindeling verfijnd naar twaalf wijken.
+In het Sankey diagram hieronder is grafisch weergegeven hoe de adressen verschuiven tussen de wijken van 2017 naar 2018. De wijzigingen zijn tamelijk complex, in de zin dat de nieuwe wijken zowel uit adressen uit stedelijk als uit landelijk gebied kunnen zijn samengesteld.
+
+```{r sankey_wijk}
+library(grenswijzigen)
+library(networkD3)
+
+mat <-grenswijziging_toevoeging_wijk_van_2017_naar_2018
+# take only Wageningen (gwb_code begint met 0289)
+mat <- mat[grepl("^0289", rownames(mat)), grepl("^0289", colnames(mat))]
+df.links <- data.frame(
+  value=as.vector(mat), 
+  target=rep(0:(nrow(mat)-1), ncol(mat)), 
+  source=rep(nrow(mat):(nrow(mat)+ncol(mat)-1), each=nrow(mat))
+)
+df.nodes <- merge(
+  data.frame(
+    name=c(rownames(mat), colnames(mat)),
+    Year=c(rep(2018, nrow(mat)), rep(2017, ncol(mat)))
+  ),
+  df %>% mutate(name=trimws(gsub("(^WK)", "", WijkenEnBuurten))),
+  sort=FALSE
+)
+df.links <- df.links[df.links$value > 0, ]
+
+sankeyNetwork(
+  Links = df.links, 
+  Nodes = df.nodes, 
+  Source = 'source',
+  Target = 'target', 
+  Value = 'value', 
+  NodeID = 'WijkenEnBuurten_label',
+  fontSize = 12
+)
+```
+
 
 
 ## Toepassen grenscorrecties
