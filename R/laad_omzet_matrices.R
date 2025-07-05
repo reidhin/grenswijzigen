@@ -77,22 +77,31 @@ laad_omzet_matrices <- function(
     }
   }
 
-  if (!exists(matrix.naam)) {
-    writeLines(
-      sprintf(
-        "De matrix '%s' bestaat niet.",
-        matrix.naam
+  getdata <- function(...) {
+    e <- new.env()
+    name <- utils::data(list=c(...), envir = e)[1]
+    e[[name]]
+  }
+
+  out <- tryCatch(
+    getdata(matrix.naam),
+    condition = function(e) {
+      writeLines(
+        sprintf(
+          "De matrix '%s' bestaat niet.",
+          matrix.naam
+        )
       )
-    )
-    writeLines(
+      writeLines(
         "
         Nieuwe matrices voor omzettingen kunnen gemaakt worden door de code
         vanuit GitLab te clonen. De code hiervoor kan in de folder 'raw-data'
         worden gevonden.
         "
-    )
-    stop("niet-bestaande matrix gekozen.")
-  }
+      )
+      stop(e)
+    }
+  )
 
-  return(get(matrix.naam))
+  return(out)
 }
