@@ -1,3 +1,7 @@
+# Grenswijzigen 0.1.3
+
+* Fix bug such that namespace is treated correctly in `laad_omzet_matrices.R`
+
 # Grenswijzigen 0.1.2
 
 * Update Vignette
