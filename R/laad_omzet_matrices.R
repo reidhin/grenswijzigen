@@ -79,7 +79,7 @@ laad_omzet_matrices <- function(
 
   getdata <- function(...) {
     e <- new.env()
-    name <- utils::data(list=c(...), envir = e)[1]
+    name <- utils::data(list=c(...), envir = e, package="grenswijzigen")[1]
     e[[name]]
   }
 
